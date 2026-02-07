@@ -3,7 +3,7 @@
 //namespace ContactsApp.ConsoleUI.Features.Exit
 //{
 //    public class ExitPresenter
-//    {   
+//    {
 //        private readonly IExitView _view;
 
 //        public ExitPresenter(IExitView view)

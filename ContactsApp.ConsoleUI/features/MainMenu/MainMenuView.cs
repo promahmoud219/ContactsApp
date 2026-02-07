@@ -24,7 +24,7 @@ namespace ContactsApp.ConsoleUI.Features.MainMenu
             //Console.WriteLine("3- Update Contact");
             //Console.WriteLine("4- Search Contact");
             //Console.WriteLine("5- Show All Contacts");
-            //Console.WriteLine("6- Exit");
+            Console.WriteLine("6- Exit");
             Console.WriteLine("------------------------");
         }
         

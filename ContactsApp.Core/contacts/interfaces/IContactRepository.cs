@@ -1,5 +1,5 @@
 using ContactsApp.Core.Contacts.Entities;
-using ContactsApp.Core.Contacts.UseCases.SearchContacts;
+//using ContactsApp.Core.Contacts.UseCases.SearchContacts;
 
 namespace ContactsApp.Core.Contacts.Interfaces
 {

@@ -9,6 +9,7 @@ namespace ContactsApp.ConsoleUI.Application
 {
     public class ApplicationController 
     {
+        private readonly MainMenuView _mainMenuView;
         private readonly IShowMessage _messageView;
         private readonly AddContactController _addController;
 
@@ -30,9 +31,7 @@ namespace ContactsApp.ConsoleUI.Application
                     case MainMenuView.MenuChoice.AddContact:
                         HandleAddContactFlow();
                         break;
-                    //case MenuChoice.Exit:
-                    //    HandleExitFlow();
-                    //    return;
+                    
                 }
             }
         }
