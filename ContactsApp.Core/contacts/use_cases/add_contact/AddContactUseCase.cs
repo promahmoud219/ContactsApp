@@ -1,9 +1,11 @@
 using ContactsApp.Core.Contacts.Entities;
+using ContactsApp.Core.Shared;
 using ContactsApp.Core.Contacts.Interfaces;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ContactsApp.Core.Contacts.UseCases.AddContact
 {
-    public class AddContactUseCase
+    public class AddContactUseCase : IAddContactUseCase
     {
         private readonly IContactRepository _repository;
 
@@ -11,8 +13,7 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
-
-        public AddContactOutput Execute(AddContactInput input)
+        public OperationResult<AddContactOutput> Execute(AddContactInput input)
         {
             if (input is null)
                 throw new ArgumentNullException(nameof(input));
@@ -35,8 +36,13 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
                 contact.Address,
                 contact.CountryId
             );
-
-            return output;
+            var result = new OperationResult<AddContactOutput>
+            (
+                OperationStatus.Success,
+                output,
+                null
+            );
+            return result;
         }
     }
 }
