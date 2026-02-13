@@ -4,7 +4,11 @@ namespace ContactsApp.Infrastructure.Data
 {
     public static class DatabaseInitializer
     {
-        public static readonly string ConnectionString = System.Environment.GetEnvironmentVariable("Contacts_DB_CONN");
+        public static readonly string ConnectionString = 
+            System.Environment.GetEnvironmentVariable("Contacts_DB_CONN")
+            ?? throw new InvalidOperationException("Connection string not found in environment variables.")
+
+            ;
 
         public static string GetConnectionString() => ConnectionString;
 

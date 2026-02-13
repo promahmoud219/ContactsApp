@@ -17,32 +17,51 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
         {
             if (input is null)
                 throw new ArgumentNullException(nameof(input));
-            var contact = new Contact(
-                input.FirstName, 
-                input.LastName, 
-                input.Phone, 
-                input.Email, 
-                input.Address, 
-                input.CountryId
-            );
+            try
+            {
+                var contact = new Contact(
+                    input.FirstName, 
+                    input.LastName, 
+                    input.Phone, 
+                    input.Email, 
+                    input.Address, 
+                    input.CountryId
+                );
             
-            _repository.AddContact(contact);
+                _repository.AddContact(contact);
             
-            var output = new AddContactOutput(
-                contact.Id,
-                $"{contact.FirstName} {contact.LastName}",
-                contact.Phone,
-                contact.Email,
-                contact.Address,
-                contact.CountryId
-            );
-            var result = new OperationResult<AddContactOutput>
-            (
-                OperationStatus.Success,
-                output,
-                null
-            );
-            return result;
+                var output = new AddContactOutput(
+                    contact.Id,
+                    $"{contact.FirstName} {contact.LastName}",
+                    contact.Phone,
+                    contact.Email,
+                    contact.Address,
+                    contact.CountryId
+                );
+                var result = new OperationResult<AddContactOutput>
+                (
+                    OperationStatus.Success,
+                    output,
+                    null
+                );
+                return result;
+            }
+            catch (ArgumentException ex)
+            {
+                return new OperationResult<AddContactOutput>(
+                    OperationStatus.ValidationError,
+                    null,
+                    ex.Message
+                );
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult<AddContactOutput>(
+                    OperationStatus.Failure,
+                    null,
+                    ex.Message
+                );
+            }
         }
     }
 }

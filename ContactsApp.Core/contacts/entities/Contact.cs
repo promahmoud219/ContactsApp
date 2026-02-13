@@ -2,7 +2,7 @@ namespace ContactsApp.Core.Contacts.Entities
 {
     public class Contact
     {
-        public int Id { get; private set; }
+        public Guid Id { get; private set; } = Guid.NewGuid();
         public string FirstName { get; private set; } 
         public string LastName { get; private set; }
         public string Phone { get; private set; }
@@ -30,10 +30,15 @@ namespace ContactsApp.Core.Contacts.Entities
 
         public void SetLastName(string lastName)
         {
-            if (string.IsNullOrWhiteSpace(lastName) || lastName.Length < 3 || lastName.Length > 30)
-                throw new ArgumentException("Invalid Last name.");
+            if (string.IsNullOrWhiteSpace(lastName)
+                || lastName.Length < 3
+                || lastName.Length > 30
+                || !lastName.All(char.IsLetter))
+                throw new ArgumentException("Last name must contain only letters and be between 3 and 30 characters.");
+
             LastName = lastName.Trim();
         }
+
         public void SetPhone(string phone)
         {
             if (string.IsNullOrWhiteSpace(phone) || !phone.All(char.IsDigit))
@@ -56,7 +61,7 @@ namespace ContactsApp.Core.Contacts.Entities
         public void SetCountryId(int countryId)
         {
 
-            if (countryId < 0 || countryId > 4)
+            if (countryId < 1 || countryId > 5)
                 throw new ArgumentException("Invalid CountryId.");
             CountryId = countryId;
         }
