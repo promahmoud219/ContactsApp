@@ -11,14 +11,30 @@ using ContactsApp.ConsoleUI.Features.AddContact;
 using ContactsApp.ConsoleUI.Features.MainMenu;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Client;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Serilog;
 
 internal class Program
 {
 
     static void Main(string[] args)
     {
-        DatabaseInitializer.Initialize();
 
+
+        DatabaseInitializer.Initialize();
+        
+        var services = ConfigureServices();
+        var provider = services.BuildServiceProvider();
+        
+        var app = provider.GetRequiredService<ApplicationController>();
+        
+        app.Run();
+    }
+
+    public static IServiceCollection ConfigureServices()
+    {
         var services = new ServiceCollection();
 
         // Core / Infra
@@ -37,9 +53,23 @@ internal class Program
         // Shared
         services.AddTransient<IShowMessage, ConsoleMessageView>();
 
-        var provider = services.BuildServiceProvider();
+        // logging
+        services.AddLogging(builder =>
+        {
+            builder.ClearProviders();
+            builder.AddSerilog();
+        });
+            
+        return services;
+    }
 
-        var app = provider.GetRequiredService<ApplicationController>();
-        app.Run();
+    public IConfiguration BuildConfiguration()
+    {
+
+        return new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables("ContactsApp_")
+            .Build();
     }
 }
