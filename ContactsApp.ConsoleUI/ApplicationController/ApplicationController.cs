@@ -1,7 +1,6 @@
 using ContactsApp.ConsoleUI.Features.AddContact;    
 using ContactsApp.ConsoleUI.Features.MainMenu;
 using ContactsApp.ConsoleUI.Shared;
-using ContactsApp.Core.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
 
@@ -35,22 +34,24 @@ namespace ContactsApp.ConsoleUI.Application
                 }
             }
         }
-
-        private void HandleAddContactFlow()
+        
+        private async Task HandleAddContactFlow()
         {
-            var result = _addController.Run();
+            var result = await _addController.Run();
 
-            if (result.Status == OperationStatus.Success)
+            if (result.IsSuccess)
             {
                 _messageView.ShowMessage("Contact added successfully!", ConsoleColor.Green);
                 return;
             }
 
-            if (result.Status == OperationStatus.ValidationError)
+            if (result.IsValidationError)
             {
                 _messageView.ShowMessage($"Validation Error: {result.ErrorMessage}", ConsoleColor.Yellow);
                 return;
             }
+
+            _messageView.ShowMessage(result.ErrorMessage ?? "Operation failed.", ConsoleColor.Yellow);
         }
         
         private void HandleExitFlow()

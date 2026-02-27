@@ -1,4 +1,3 @@
-using ContactsApp.Core.Contacts.UseCases.AddContact;
 
 namespace ContactsApp.ConsoleUI.Features.AddContact
 {
