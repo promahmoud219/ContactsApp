@@ -1,4 +1,4 @@
-namespace ContactsApp.Contracts.Requests
+namespace ContactsApp.Contracts.Contacts.Requests
 {
     public record AddContactRequest
     (

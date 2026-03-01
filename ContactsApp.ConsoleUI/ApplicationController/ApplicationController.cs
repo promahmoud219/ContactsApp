@@ -1,8 +1,10 @@
-using ContactsApp.ConsoleUI.Features.AddContact;    
+﻿using ContactsApp.ConsoleUI.Features.AddContact;    
 using ContactsApp.ConsoleUI.Features.MainMenu;
 using ContactsApp.ConsoleUI.Shared;
+using ContactsApp.ConsoleUI.Results;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
+using System.Dynamic;
 
 namespace ContactsApp.ConsoleUI.Application
 {
@@ -19,7 +21,7 @@ namespace ContactsApp.ConsoleUI.Application
             _messageView = messageView;
         }
 
-        public void Run()
+        public async Task RunAsync()
         {
             while (true)
             {
@@ -28,7 +30,7 @@ namespace ContactsApp.ConsoleUI.Application
                 switch (choice)
                 {
                     case MainMenuView.MenuChoice.AddContact:
-                        HandleAddContactFlow();
+                        await HandleAddContactFlow();
                         break;
                     
                 }
@@ -37,21 +39,34 @@ namespace ContactsApp.ConsoleUI.Application
         
         private async Task HandleAddContactFlow()
         {
-            var result = await _addController.Run();
-
+            var result = await _addController.RunAsync();
+ 
             if (result.IsSuccess)
             {
                 _messageView.ShowMessage("Contact added successfully!", ConsoleColor.Green);
                 return;
-            }
 
-            if (result.IsValidationError)
+                // Navigation decision centralized here, i will call _showAllContactsController.RunAsync()
+                // to show the updated list of contacts after adding a new one.
+                // now it's commented till i implement it. 
+                // or i can do this instead: await NavigateToAfterAdd();
+                //await _showAllContactsController.RunAsync();
+            } 
+
+            switch (result.ErrorType)
             {
-                _messageView.ShowMessage($"Validation Error: {result.ErrorMessage}", ConsoleColor.Yellow);
-                return;
-            }
+                case ClientErrorType.NetworkFailure:
+                    _messageView.ShowMessage("Server is down. Please try again later.", ConsoleColor.Red);
+                    break;
 
-            _messageView.ShowMessage(result.ErrorMessage ?? "Operation failed.", ConsoleColor.Yellow);
+                case ClientErrorType.Timeout:
+                    _messageView.ShowMessage("The request timed out.", ConsoleColor.Yellow);
+                    break;
+
+                default:
+                    _messageView.ShowMessage(result.ErrorMessage ?? "ApplicationControllerOperation failed.", ConsoleColor.Red);
+                    break;
+            }
         }
         
         private void HandleExitFlow()

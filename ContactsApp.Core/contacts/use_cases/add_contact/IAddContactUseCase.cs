@@ -6,6 +6,6 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
 {
     public interface IAddContactUseCase
     {
-        OperationResult<AddContactOutput> Execute(AddContactInput input);
+        Task<OperationResult<AddContactOutput>> ExecuteAsync(AddContactInput input);
     }
 }

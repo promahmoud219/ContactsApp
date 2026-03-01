@@ -1,4 +1,4 @@
-namespace ContactsApp.Contracts.Responses
+namespace ContactsApp.Contracts.Contacts.Responses
 {
     public record AddContactResponse
     (

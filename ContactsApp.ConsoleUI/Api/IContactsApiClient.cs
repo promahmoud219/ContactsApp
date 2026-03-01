@@ -1,9 +1,11 @@
 using ContactsApp.Contracts.Contacts.Requests;
 using ContactsApp.Contracts.Contacts.Responses;
+using ContactsApp.ConsoleUI.Results;
+
 namespace ContactsApp.ConsoleUI.Api
 {
     public interface IContactsApiClient
     {
-        Task<AddContactResponse?> AddContactAsync(AddContactRequest request);
+        Task<ClientResult<AddContactResponse?>> AddContactAsync(AddContactRequest request);
     }
 }

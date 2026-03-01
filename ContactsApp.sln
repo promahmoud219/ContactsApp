@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.WebAPI", "Conta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.Contracts", "ContactsApp.Contracts\ContactsApp.Contracts.csproj", "{72AB2487-D4D8-4CF4-A50F-A374099CA357}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.WebClient", "ContactsApp.WebClient\ContactsApp.WebClient.csproj", "{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{72AB2487-D4D8-4CF4-A50F-A374099CA357}.Release|x64.Build.0 = Release|Any CPU
 		{72AB2487-D4D8-4CF4-A50F-A374099CA357}.Release|x86.ActiveCfg = Release|Any CPU
 		{72AB2487-D4D8-4CF4-A50F-A374099CA357}.Release|x86.Build.0 = Release|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Debug|x64.Build.0 = Debug|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Debug|x86.Build.0 = Debug|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Release|x64.ActiveCfg = Release|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Release|x64.Build.0 = Release|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Release|x86.ActiveCfg = Release|Any CPU
+		{F70BA44B-297A-4108-95CF-E2A6CB3AB62F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

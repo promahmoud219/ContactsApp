@@ -1,5 +1,5 @@
-using ContactsApp.Contracts.Requests;
-using ContactsApp.Contracts.Responses;
+using ContactsApp.Contracts.Contacts.Responses;
+using ContactsApp.Contracts.Contacts.Requests;
 using ContactsApp.Core.Contacts.Entities;
 using ContactsApp.Core.Contacts.UseCases.AddContact;
 

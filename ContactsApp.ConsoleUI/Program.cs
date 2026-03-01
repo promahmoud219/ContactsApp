@@ -6,12 +6,17 @@ using ContactsApp.ConsoleUI.Api; // فيه IContactsApiClient + implementation
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 using Serilog;
+using Microsoft.Extensions.Configuration;
+using Serilog.Settings.Configuration;
+
+//using Microsoft.Extensions.Http;
+
+
 
 internal class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         var configuration = BuildConfiguration();
 
@@ -24,7 +29,7 @@ internal class Program
         var provider = services.BuildServiceProvider();
 
         var app = provider.GetRequiredService<ApplicationController>();
-        app.Run();
+        await app.RunAsync();
     }
 
     private static IServiceCollection ConfigureServices(IConfiguration config)
@@ -41,7 +46,6 @@ internal class Program
 
         // ===== Console Features =====
         services.AddTransient<AddContactController>();
-        services.AddTransient<IAddContactOutputPort, AddContactOutputPort>();
         services.AddTransient<AddContactView>();
         services.AddTransient<MainMenuView>();
 

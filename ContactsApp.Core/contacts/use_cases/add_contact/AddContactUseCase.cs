@@ -13,7 +13,7 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
-        public OperationResult<AddContactOutput> Execute(AddContactInput input)
+        public async Task<OperationResult<AddContactOutput>> ExecuteAsync(AddContactInput input)
         {
             if (input is null)
                 throw new ArgumentNullException(nameof(input));
