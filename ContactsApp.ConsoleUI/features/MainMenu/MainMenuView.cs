@@ -5,7 +5,8 @@ namespace ContactsApp.ConsoleUI.Features.MainMenu
     {
         public enum MenuChoice
         {
-            AddContact = 1,
+            CreateContact = 1,
+            DeleteContact = 2,
             Exit = 6,
             Invalid = -1
         }
@@ -19,8 +20,8 @@ namespace ContactsApp.ConsoleUI.Features.MainMenu
         private void Render()
         {
             Console.WriteLine("\t\t\tMain Menu");
-            Console.WriteLine("1- Add Contact");
-            //Console.WriteLine("2- Delete Contact");
+            Console.WriteLine("1- Create Contact");
+            Console.WriteLine("2- Delete Contact");
             //Console.WriteLine("3- Update Contact");
             //Console.WriteLine("4- Search Contact");
             //Console.WriteLine("5- Show All Contacts");
@@ -36,7 +37,8 @@ namespace ContactsApp.ConsoleUI.Features.MainMenu
             {
                 return choice switch
                 {
-                    1 => MenuChoice.AddContact,
+                    1 => MenuChoice.CreateContact,
+                    2 => MenuChoice.DeleteContact,
                     _ => MenuChoice.Invalid
                 };
             }

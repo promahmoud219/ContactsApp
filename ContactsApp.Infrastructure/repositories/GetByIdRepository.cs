@@ -8,7 +8,7 @@ namespace ContactsApp.Infrastructure.Repositories
 {
     public partial class ContactRepository : IContactRepository
     {
-        public Contact? GetById(Guid id)
+        public Contact? GetById(int id)
         {
             using var connection = new SqlConnection(DatabaseInitializer.GetConnectionString());
             connection.Open();

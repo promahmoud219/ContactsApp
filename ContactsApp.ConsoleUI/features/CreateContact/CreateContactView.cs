@@ -1,11 +1,10 @@
-using ContactsApp.Contracts.Contacts.Requests;
-using ContactsApp.Contracts.Contacts.Responses;
+using ContactsApp.Contracts.Contacts.CreateContact;
 
-namespace ContactsApp.ConsoleUI.Features.AddContact
+namespace ContactsApp.ConsoleUI.Features.CreateContact
 {
-    public class AddContactView
+    public class CreateContactView
     {
-        public AddContactRequest Render()
+        public CreateContactRequest Render()
         {
             Console.WriteLine("\n=== Add New Contact ===\n");
 
@@ -27,10 +26,10 @@ namespace ContactsApp.ConsoleUI.Features.AddContact
             Console.Write("Enter CountryId (numeric): ");
             int.TryParse(Console.ReadLine(), out var countryId);
 
-            return new AddContactRequest(firstName, lastName, phone, email, address, countryId);
+            return new CreateContactRequest(firstName, lastName, phone, email, address, countryId);
         }
 
-        public void ShowContactRecord(AddContactResponse response)
+        public void ShowContactRecord(CreateContactResponse response)
         {
             Console.ForegroundColor = ConsoleColor.Green;
 
@@ -42,16 +41,6 @@ namespace ContactsApp.ConsoleUI.Features.AddContact
             Console.WriteLine($"CountryId: {response.CountryId}");
 
             Console.ResetColor();
-        }
-
-
-        public void ShowMessage(string msg, ConsoleColor color = ConsoleColor.Green)
-        {
-            var prev = Console.ForegroundColor;
-            Console.ForegroundColor = color;
-            Console.WriteLine(msg);
-            Console.ForegroundColor = prev;
-        }
-
+        } 
     }
 }

@@ -7,10 +7,10 @@ namespace ContactsApp.Infrastructure.Repositories
 {
     public partial class ContactRepository : IContactRepository
     {
-        public void AddContact(Contact contact)
+        public async Task CreateContactAsync(Contact contact)
         {
             using var connection = new SqlConnection(DatabaseInitializer.GetConnectionString());
-            connection.Open();
+            await connection.OpenAsync();
 
             const string query = @"INSERT INTO Contacts (FirstName, LastName, Email, Phone, Address, CountryId) 
                                    VALUES (@FirstName, @LastName, @Email, @Phone, @Address, @CountryId)";
@@ -21,7 +21,7 @@ namespace ContactsApp.Infrastructure.Repositories
             cmd.Parameters.AddWithValue("@Phone", contact.Phone);
             cmd.Parameters.AddWithValue("@Address", (object?)contact.Address ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@CountryId", contact.CountryId);
-            cmd.ExecuteNonQuery();
+            await cmd.ExecuteNonQueryAsync();
         }
     }
 }

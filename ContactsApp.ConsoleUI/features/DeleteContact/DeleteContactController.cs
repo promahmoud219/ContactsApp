@@ -1,28 +1,35 @@
-//using ContactsApp.Core.Contacts.Interfaces;
-//using ContactsApp.Core.Contacts.UseCases;
+using ContactsApp.ConsoleUI.Api;
+using ContactsApp.ConsoleUI.Results;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
-//namespace ContactsApp.ConsoleUI.Features.DeleteContact
-//{
-//    public class DeleteContactController
-//    {
-//        private readonly IContactRepository _repository;
-//        private readonly DeleteContactPresenter _presenter;
-//        private readonly DeleteContactView _view;
+namespace ContactsApp.ConsoleUI.Features.DeleteContact
+{
+ 
+    public class DeleteContactController
+    {
+        private readonly IContactsApiClient _api;
+        private readonly DeleteContactView _view;
 
-//        public DeleteContactController(IContactRepository repository)
-//        {
-//            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-//            _view = new DeleteContactView();
-//            _presenter = new DeleteContactPresenter(_view);
-//        }
+        public DeleteContactController(IContactsApiClient api, DeleteContactView view)
+        {
+            _api = api ?? throw new ArgumentNullException(nameof(api));
+            _view = view ?? throw new ArgumentNullException(nameof(view));
+        }
 
-//        public void Run()
-//        {
-//            string name = _view.GetContactName();
-//            //var useCase = new Delete
-//            bool result = useCase.Execute(name);
+        public async Task<ClientResult<NoContent>> RunAsync()
+        {
+            int id = _view.GetContactId();
+            var confirmed = _view.ConfirmDelete(id);
 
-//            _presenter.ShowDeleteResult(success, name);
-//        }
-//    }
-//}
+            if (!confirmed)
+                return ClientResult<NoContent>.Failure(
+                    HttpStatusCode.BadRequest,
+                    "Deletion cancelled",
+                    ClientErrorType.Validation);
+
+            return await _api.DeleteContactAsync(id);
+        }
+    }
+}

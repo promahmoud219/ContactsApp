@@ -1,11 +1,13 @@
-using ContactsApp.Contracts.Contacts.Requests;
-using ContactsApp.Contracts.Contacts.Responses;
+using ContactsApp.ConsoleUI.Features.DeleteContact;
 using ContactsApp.ConsoleUI.Results;
+using ContactsApp.Contracts.Contacts.CreateContact;
 
 namespace ContactsApp.ConsoleUI.Api
 {
     public interface IContactsApiClient
     {
-        Task<ClientResult<AddContactResponse?>> AddContactAsync(AddContactRequest request);
+        Task<ClientResult<CreateContactResponse?>> CreateContactAsync(CreateContactRequest request);
+        Task<ClientResult<NoContent>> DeleteContactAsync(int id);
+
     }
 }

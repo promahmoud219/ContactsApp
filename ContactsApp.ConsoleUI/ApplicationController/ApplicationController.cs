@@ -1,4 +1,5 @@
-﻿using ContactsApp.ConsoleUI.Features.AddContact;    
+﻿using ContactsApp.ConsoleUI.Features.CreateContact;
+using ContactsApp.ConsoleUI.Features.DeleteContact;
 using ContactsApp.ConsoleUI.Features.MainMenu;
 using ContactsApp.ConsoleUI.Shared;
 using ContactsApp.ConsoleUI.Results;
@@ -8,16 +9,26 @@ using System.Dynamic;
 
 namespace ContactsApp.ConsoleUI.Application
 {
-    public class ApplicationController 
+    public class ApplicationController
     {
         private readonly MainMenuView _mainMenuView;
         private readonly IShowMessage _messageView;
-        private readonly AddContactController _addController;
+        private readonly CreateContactController _createController;
+        private readonly DeleteContactController _deleteController;
+        private readonly DeleteContactView _deleteView;
 
-        public ApplicationController(MainMenuView mainMenuView, AddContactController addController, IShowMessage messageView)
+
+        public ApplicationController(
+            MainMenuView mainMenuView,
+            CreateContactController createController,
+            DeleteContactController deleteController,
+            DeleteContactView deleteView,
+            IShowMessage messageView)
         {
             _mainMenuView = mainMenuView;
-            _addController = addController;
+            _createController = createController;
+            _deleteController = deleteController;
+            _deleteView = deleteView;
             _messageView = messageView;
         }
 
@@ -29,18 +40,22 @@ namespace ContactsApp.ConsoleUI.Application
 
                 switch (choice)
                 {
-                    case MainMenuView.MenuChoice.AddContact:
-                        await HandleAddContactFlow();
+                    case MainMenuView.MenuChoice.CreateContact:
+                        await HandleCreateContactFlow();
                         break;
-                    
+                    case MainMenuView.MenuChoice.DeleteContact:
+                        await HandleDeleteContactFlow();
+                        break;
+
+
                 }
             }
         }
-        
-        private async Task HandleAddContactFlow()
+
+        private async Task HandleCreateContactFlow()
         {
-            var result = await _addController.RunAsync();
- 
+            var result = await _createController.RunAsync();
+
             if (result.IsSuccess)
             {
                 _messageView.ShowMessage("Contact added successfully!", ConsoleColor.Green);
@@ -51,7 +66,7 @@ namespace ContactsApp.ConsoleUI.Application
                 // now it's commented till i implement it. 
                 // or i can do this instead: await NavigateToAfterAdd();
                 //await _showAllContactsController.RunAsync();
-            } 
+            }
 
             switch (result.ErrorType)
             {
@@ -68,14 +83,45 @@ namespace ContactsApp.ConsoleUI.Application
                     break;
             }
         }
-        
+
+        private async Task HandleDeleteContactFlow()
+        {
+
+            // i will implement this when i finish search feature:
+            //var contacts = await _searchController.Run();
+            //var selected = _selectContactView.Select(contacts);
+            //var confirmed = _confirmDeleteView.Confirm(selected);
+
+            var result = await _deleteController.RunAsync();
+            if (result.IsSuccess)
+            {
+                _messageView.ShowMessage("Contact deleted successfully!", ConsoleColor.Green);
+                return;
+            }
+            switch (result.ErrorType)
+            {
+                case ClientErrorType.NetworkFailure:
+                    _messageView.ShowMessage("Server is down. Please try again later.", ConsoleColor.Red);
+                    break;
+                case ClientErrorType.Timeout:
+                    _messageView.ShowMessage("The request timed out.", ConsoleColor.Yellow);
+                    break;
+                default:
+                    _messageView.ShowMessage(result.ErrorMessage ?? "ApplicationControllerOperation failed.", ConsoleColor.Red);
+                    break;
+            }
+        }
+
+
+
         private void HandleExitFlow()
         {
             _messageView.ShowMessage("Exiting application.... Goodbye!", ConsoleColor.Cyan);
             Thread.Sleep(3000);
- 
+
             for (int i = 0; i < 10; i++)
                 Console.Beep();
         }
     }
+
 }

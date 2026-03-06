@@ -1,7 +1,8 @@
-namespace ContactsApp.Core.Contacts.UseCases.AddContact
+namespace ContactsApp.Contracts.Contacts.CreateContact
 {
-    public record AddContactOutput(
-        Guid Id,
+    public record CreateContactResponse
+    (
+        int Id,
         string FullName,
         string Phone,
         string? Email,

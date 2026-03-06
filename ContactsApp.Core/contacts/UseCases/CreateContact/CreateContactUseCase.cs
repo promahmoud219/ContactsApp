@@ -1,19 +1,20 @@
 using ContactsApp.Core.Contacts.Entities;
-using ContactsApp.Core.Shared;
 using ContactsApp.Core.Contacts.Interfaces;
+using ContactsApp.Core.Contacts.UseCases.CreateContact;
+using ContactsApp.Core.Shared;
 using System.Security.Cryptography.X509Certificates;
 
-namespace ContactsApp.Core.Contacts.UseCases.AddContact
+namespace ContactsApp.Core.Contacts.UseCases.CreateContact
 {
-    public class AddContactUseCase : IAddContactUseCase
+    public class CreateContactUseCase : ICreateContactUseCase
     {
         private readonly IContactRepository _repository;
 
-        public AddContactUseCase(IContactRepository repository)
+        public CreateContactUseCase(IContactRepository repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
-        public async Task<OperationResult<AddContactOutput>> ExecuteAsync(AddContactInput input)
+        public async Task<OperationResult<CreateContactOutput>> ExecuteAsync(CreateContactInput input)
         {
             if (input is null)
                 throw new ArgumentNullException(nameof(input));
@@ -27,10 +28,10 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
                     input.Address, 
                     input.CountryId
                 );
-            
-                _repository.AddContact(contact);
-            
-                var output = new AddContactOutput(
+
+                await _repository.CreateContactAsync(contact);
+
+                var output = new CreateContactOutput(
                     contact.Id,
                     $"{contact.FirstName} {contact.LastName}",
                     contact.Phone,
@@ -38,7 +39,7 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
                     contact.Address,
                     contact.CountryId
                 );
-                var result = new OperationResult<AddContactOutput>
+                var result = new OperationResult<CreateContactOutput>
                 (
                     OperationStatus.Success,
                     output,
@@ -48,7 +49,7 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
             }
             catch (ArgumentException ex)
             {
-                return new OperationResult<AddContactOutput>(
+                return new OperationResult<CreateContactOutput>(
                     OperationStatus.ValidationError,
                     null,
                     ex.Message
@@ -56,7 +57,7 @@ namespace ContactsApp.Core.Contacts.UseCases.AddContact
             }
             catch (Exception ex)
             {
-                return new OperationResult<AddContactOutput>(
+                return new OperationResult<CreateContactOutput>(
                     OperationStatus.Failure,
                     null,
                     ex.Message

@@ -1,18 +1,17 @@
-using ContactsApp.Contracts.Contacts.Responses;
-using ContactsApp.Contracts.Contacts.Requests;
+using ContactsApp.Contracts.Contacts.CreateContact;
 using ContactsApp.Core.Contacts.Entities;
-using ContactsApp.Core.Contacts.UseCases.AddContact;
+using ContactsApp.Core.Contacts.UseCases.CreateContact;
 
 namespace ContactsApp.WebAPI.Mappings
 {
-    public static class AddContactMapping
+    public static class CreateContactMapping
     {
-        public static AddContactInput ToInput(AddContactRequest request)
+        public static CreateContactInput ToInput(CreateContactRequest request)
         {
             if (request is null)
                 throw new ArgumentNullException(nameof(request));
-            
-            return new AddContactInput(
+
+            return new CreateContactInput(
                 request.FirstName,
                 request.LastName,
                 request.Phone,
@@ -21,12 +20,12 @@ namespace ContactsApp.WebAPI.Mappings
                 request.CountryId
             );
         }
-        public static AddContactResponse ToResponse(AddContactOutput output)
+        public static CreateContactResponse ToResponse(CreateContactOutput output)
         {
             if (output is null)
                 throw new ArgumentNullException(nameof(output));
-            
-            return new AddContactResponse(
+
+            return new CreateContactResponse(
                 output.Id,
                 output.FullName,
                 output.Phone,

@@ -1,5 +1,6 @@
 ﻿using ContactsApp.ConsoleUI.Application;
-using ContactsApp.ConsoleUI.Features.AddContact;
+using ContactsApp.ConsoleUI.Features.CreateContact;
+using ContactsApp.ConsoleUI.Features.DeleteContact;
 using ContactsApp.ConsoleUI.Features.MainMenu;
 using ContactsApp.ConsoleUI.Shared;
 using ContactsApp.ConsoleUI.Api; // فيه IContactsApiClient + implementation
@@ -9,8 +10,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Microsoft.Extensions.Configuration;
 using Serilog.Settings.Configuration;
-
-//using Microsoft.Extensions.Http;
+ 
 
 
 
@@ -35,8 +35,7 @@ internal class Program
     private static IServiceCollection ConfigureServices(IConfiguration config)
     {
         var services = new ServiceCollection();
-
-        // ===== Http Client Registration =====
+         
         var baseUrl = config["Api:BaseUrl"];
 
         services.AddHttpClient<IContactsApiClient, ContactsApiClient>(client =>
@@ -45,9 +44,11 @@ internal class Program
         });
 
         // ===== Console Features =====
-        services.AddTransient<AddContactController>();
-        services.AddTransient<AddContactView>();
         services.AddTransient<MainMenuView>();
+        services.AddTransient<CreateContactController>();
+        services.AddTransient<CreateContactView>();
+        services.AddTransient<DeleteContactController>();
+        services.AddTransient<DeleteContactView>();
 
         services.AddSingleton<ApplicationController>();
 

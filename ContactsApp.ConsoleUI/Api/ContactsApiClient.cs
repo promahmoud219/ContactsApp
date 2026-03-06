@@ -1,7 +1,6 @@
 using System.Net.Http.Json;
 using System.Net;
-using ContactsApp.Contracts.Contacts.Requests;
-using ContactsApp.Contracts.Contacts.Responses;
+using ContactsApp.Contracts.Contacts.CreateContact;
 using ContactsApp.ConsoleUI.Results;
 
 namespace ContactsApp.ConsoleUI.Api
@@ -15,7 +14,7 @@ namespace ContactsApp.ConsoleUI.Api
             _httpClient = httpClient;
         }
 
-        public async Task<ClientResult<AddContactResponse?>> AddContactAsync(AddContactRequest request)
+        public async Task<ClientResult<CreateContactResponse?>> CreateContactAsync(CreateContactRequest request)
         {
             try
             {
@@ -24,8 +23,8 @@ namespace ContactsApp.ConsoleUI.Api
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var data = await response.Content.ReadFromJsonAsync<AddContactResponse>();
-                    return ClientResult<AddContactResponse?>.Success(response.StatusCode, data!);
+                    var data = await response.Content.ReadFromJsonAsync<CreateContactResponse>();
+                    return ClientResult<CreateContactResponse?>.Success(response.StatusCode, data!);
                 }
 
                 var error = await response.Content.ReadAsStringAsync();
@@ -38,15 +37,55 @@ namespace ContactsApp.ConsoleUI.Api
                     _ => ClientErrorType.ServerError
                 };
 
-                return ClientResult<AddContactResponse?>.Failure(response.StatusCode, error, errorType);
+                return ClientResult<CreateContactResponse?>.Failure(response.StatusCode, error, errorType);
             }
             catch (HttpRequestException ex)
             {
-                return ClientResult<AddContactResponse?>.Failure(HttpStatusCode.ServiceUnavailable, "Server is not reachable.", ClientErrorType.NetworkFailure);
+                return ClientResult<CreateContactResponse?>.Failure(HttpStatusCode.ServiceUnavailable, "Server is not reachable.", ClientErrorType.NetworkFailure);
             }
             catch (TaskCanceledException ex)
             {
-                return ClientResult<AddContactResponse?>.Failure(HttpStatusCode.RequestTimeout, "Request timed out.", ClientErrorType.Timeout);
+                return ClientResult<CreateContactResponse?>.Failure(HttpStatusCode.RequestTimeout, "Request timed out.", ClientErrorType.Timeout);
+            }
+        }
+
+        public async Task<ClientResult<NoContent>> DeleteContactAsync(int id)
+        {
+            try
+            {
+                var response = await _httpClient.DeleteAsync($"/api/contacts/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return ClientResult<NoContent>.Success(response.StatusCode);
+                }
+
+                var error = await response.Content.ReadAsStringAsync();
+
+                var errorType = response.StatusCode switch
+                {
+                    HttpStatusCode.BadRequest => ClientErrorType.Validation,
+                    HttpStatusCode.NotFound => ClientErrorType.NotFound,
+                    HttpStatusCode.Unauthorized => ClientErrorType.Unauthorized,
+                    HttpStatusCode.InternalServerError => ClientErrorType.ServerError,
+                    _ => ClientErrorType.ServerError
+                };
+
+                return ClientResult<NoContent>.Failure(response.StatusCode, error, errorType);
+            }
+            catch (HttpRequestException)
+            {
+                return ClientResult<NoContent>.Failure(
+                    HttpStatusCode.ServiceUnavailable,
+                    "Server is not reachable.",
+                    ClientErrorType.NetworkFailure);
+            }
+            catch (TaskCanceledException)
+            {
+                return ClientResult<NoContent>.Failure(
+                    HttpStatusCode.RequestTimeout,
+                    "Request timed out.",
+                    ClientErrorType.Timeout);
             }
         }
     }

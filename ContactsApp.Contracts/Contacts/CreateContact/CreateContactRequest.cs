@@ -1,6 +1,7 @@
-namespace ContactsApp.Core.Contacts.UseCases.AddContact
+namespace ContactsApp.Contracts.Contacts.CreateContact
 {
-    public record AddContactInput(
+    public record CreateContactRequest  
+    (
         string FirstName,
         string LastName,
         string Phone,

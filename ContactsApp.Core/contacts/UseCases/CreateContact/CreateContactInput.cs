@@ -1,7 +1,6 @@
-namespace ContactsApp.Contracts.Contacts.Requests
-{
-    public record AddContactRequest
-    (
+namespace ContactsApp.Core.Contacts.UseCases.CreateContact
+{   
+    public record CreateContactInput(
         string FirstName,
         string LastName,
         string Phone,
@@ -9,4 +8,4 @@ namespace ContactsApp.Contracts.Contacts.Requests
         string? Address,
         int CountryId
     );
-}
+}                   

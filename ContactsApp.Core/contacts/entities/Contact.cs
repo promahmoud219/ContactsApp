@@ -2,7 +2,7 @@ namespace ContactsApp.Core.Contacts.Entities
 {
     public class Contact
     {
-        public Guid Id { get; private set; } = Guid.NewGuid();
+        public int Id { get; private set; }
         public string FirstName { get; private set; } 
         public string LastName { get; private set; }
         public string Phone { get; private set; }
