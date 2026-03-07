@@ -17,6 +17,7 @@ namespace ContactsApp.ConsoleUI.Application
         private readonly CreateContactController _createController;
         private readonly DeleteContactController _deleteController;
         private readonly GetContactByIdController _getByIdController;
+        private readonly GetContactByIdView _getByIdView;
         private readonly DeleteContactView _deleteView;
 
 
@@ -25,6 +26,7 @@ namespace ContactsApp.ConsoleUI.Application
             CreateContactController createController,
             DeleteContactController deleteController,
             GetContactByIdController getByIdController,
+            GetContactByIdView getContactByIdView,
             DeleteContactView deleteView,
             IShowMessage messageView)
         {
@@ -32,6 +34,7 @@ namespace ContactsApp.ConsoleUI.Application
             _createController = createController;
             _deleteController = deleteController;
             _getByIdController = getByIdController;
+            _getByIdView = getContactByIdView;
             _deleteView = deleteView;
             _messageView = messageView;
         }
@@ -120,11 +123,11 @@ namespace ContactsApp.ConsoleUI.Application
         private async Task HandleGetContactByIdFlow()
         {
             var result = await _getByIdController.RunAsync();
-            // i wanna copy the scenario of the delete and create 
 
-            if (result.IsSuccess)
+            if (result.Data is not null)
             {
                 _messageView.ShowMessage("Contact retrieved successfully!", ConsoleColor.Green);
+                _getByIdView.DisplayContact(result.Data);
                 return;
             }
             switch (result.ErrorType)

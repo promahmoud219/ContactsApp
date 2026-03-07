@@ -17,13 +17,7 @@ namespace ContactsApp.ConsoleUI.Features.GetContactById
         public async Task<ClientResult<GetContactByIdResponse>> RunAsync()
         {
             int contactId = _view.GetContactId();
-            
-            var result = await _api.GetContactByIdAsync(contactId);
-
-            if (result.Data is not null)
-                _view.DisplayContact(result.Data);
-
-            return result;
+            return await _api.GetContactByIdAsync(contactId);
         }
     }
 }
