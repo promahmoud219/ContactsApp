@@ -94,13 +94,10 @@ namespace ContactsApp.ConsoleUI.Application
 
         private async Task HandleDeleteContactFlow()
         {
-
-            // i will implement this when i finish search feature:
-            //var contacts = await _searchController.Run();
-            //var selected = _selectContactView.Select(contacts);
-            //var confirmed = _confirmDeleteView.Confirm(selected);
-
             var result = await _deleteController.RunAsync();
+            
+            
+            
             if (result.IsSuccess)
             {
                 _messageView.ShowMessage("Contact deleted successfully!", ConsoleColor.Green);

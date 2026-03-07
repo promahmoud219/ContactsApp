@@ -1,4 +1,5 @@
 using ContactsApp.ConsoleUI.Api;
+using ContactsApp.Contracts.Contacts.GetContactById;
 using ContactsApp.ConsoleUI.Results;
 using System;
 using System.Net;
@@ -21,13 +22,28 @@ namespace ContactsApp.ConsoleUI.Features.DeleteContact
         public async Task<ClientResult<NoContent>> RunAsync()
         {
             int id = _view.GetContactId();
+
+            var contactResult = await _api.GetContactByIdAsync(id);
+
+            if (!contactResult.IsSuccess || contactResult.Data is null)
+            {
+                return ClientResult<NoContent>.Failure(
+                    contactResult.StatusCode,
+                    contactResult.ErrorMessage,
+                    contactResult.ErrorType);
+            }
+
+            _view.DisplayContact(contactResult.Data);
+
             var confirmed = _view.ConfirmDelete(id);
 
             if (!confirmed)
+            {
                 return ClientResult<NoContent>.Failure(
                     HttpStatusCode.BadRequest,
                     "Deletion cancelled",
                     ClientErrorType.Validation);
+            }
 
             return await _api.DeleteContactAsync(id);
         }
