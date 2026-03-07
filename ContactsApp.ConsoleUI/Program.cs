@@ -4,7 +4,7 @@ using ContactsApp.ConsoleUI.Features.DeleteContact;
 using ContactsApp.ConsoleUI.Features.GetContactById;
 using ContactsApp.ConsoleUI.Features.MainMenu;
 using ContactsApp.ConsoleUI.Shared;
-using ContactsApp.ConsoleUI.Api; // فيه IContactsApiClient + implementation
+using ContactsApp.ConsoleUI.Api;  
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
