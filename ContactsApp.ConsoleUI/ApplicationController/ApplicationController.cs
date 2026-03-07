@@ -1,5 +1,6 @@
 ﻿using ContactsApp.ConsoleUI.Features.CreateContact;
 using ContactsApp.ConsoleUI.Features.DeleteContact;
+using ContactsApp.ConsoleUI.Features.GetContactById;
 using ContactsApp.ConsoleUI.Features.MainMenu;
 using ContactsApp.ConsoleUI.Shared;
 using ContactsApp.ConsoleUI.Results;
@@ -15,6 +16,7 @@ namespace ContactsApp.ConsoleUI.Application
         private readonly IShowMessage _messageView;
         private readonly CreateContactController _createController;
         private readonly DeleteContactController _deleteController;
+        private readonly GetContactByIdController _getByIdController;
         private readonly DeleteContactView _deleteView;
 
 
@@ -22,12 +24,14 @@ namespace ContactsApp.ConsoleUI.Application
             MainMenuView mainMenuView,
             CreateContactController createController,
             DeleteContactController deleteController,
+            GetContactByIdController getByIdController,
             DeleteContactView deleteView,
             IShowMessage messageView)
         {
             _mainMenuView = mainMenuView;
             _createController = createController;
             _deleteController = deleteController;
+            _getByIdController = getByIdController;
             _deleteView = deleteView;
             _messageView = messageView;
         }
@@ -46,8 +50,9 @@ namespace ContactsApp.ConsoleUI.Application
                     case MainMenuView.MenuChoice.DeleteContact:
                         await HandleDeleteContactFlow();
                         break;
-
-
+                    case MainMenuView.MenuChoice.GetContactById:
+                        await HandleGetContactByIdFlow();
+                        break;
                 }
             }
         }
@@ -112,7 +117,29 @@ namespace ContactsApp.ConsoleUI.Application
             }
         }
 
+        private async Task HandleGetContactByIdFlow()
+        {
+            var result = await _getByIdController.RunAsync();
+            // i wanna copy the scenario of the delete and create 
 
+            if (result.IsSuccess)
+            {
+                _messageView.ShowMessage("Contact retrieved successfully!", ConsoleColor.Green);
+                return;
+            }
+            switch (result.ErrorType)
+            {
+                case ClientErrorType.NetworkFailure:
+                    _messageView.ShowMessage("Server is down. Please try again later.", ConsoleColor.Red);
+                    break;
+                case ClientErrorType.Timeout:
+                    _messageView.ShowMessage("The request timed out.", ConsoleColor.Yellow);
+                    break;
+                default:
+                    _messageView.ShowMessage(result.ErrorMessage ?? "ApplicationControllerOperation failed.", ConsoleColor.Red);
+                    break;
+            }
+        }
 
         private void HandleExitFlow()
         {

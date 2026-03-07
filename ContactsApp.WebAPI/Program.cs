@@ -1,7 +1,8 @@
-using ContactsApp.Infrastructure.Repositories;
 using ContactsApp.Core.Contacts.Interfaces;
 using ContactsApp.Core.Contacts.UseCases.CreateContact;
 using ContactsApp.Core.Contacts.UseCases.DeleteContact;
+using ContactsApp.Core.Contacts.UseCases.GetContactById;
+using ContactsApp.Infrastructure.Repositories;
 
 namespace ContactsApp.WebAPI
 {
@@ -16,6 +17,7 @@ namespace ContactsApp.WebAPI
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
             builder.Services.AddScoped<ICreateContactUseCase, CreateContactUseCase>();
             builder.Services.AddScoped<IDeleteContactUseCase, DeleteContactUseCase>();
+            builder.Services.AddScoped<IGetContactByIdUseCase, GetContactByIdUseCase>();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

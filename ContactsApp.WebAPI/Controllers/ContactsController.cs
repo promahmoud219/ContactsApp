@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ContactsApp.Core.Contacts.Interfaces; 
+﻿using ContactsApp.Core.Contacts.Interfaces; 
 using ContactsApp.Core.Contacts.UseCases.CreateContact;
 using ContactsApp.Core.Contacts.UseCases.DeleteContact;
-using ContactsApp.WebAPI.Mappings;
+using ContactsApp.Core.Contacts.UseCases.GetContactById;
 using ContactsApp.Contracts.Contacts.CreateContact;
 using ContactsApp.Core.Shared;
+using ContactsApp.WebAPI.Mappings;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsApp.WebAPI.Controllers
 {
@@ -14,15 +16,20 @@ namespace ContactsApp.WebAPI.Controllers
     {
         private readonly ICreateContactUseCase _createContactUseCase;
         private readonly IDeleteContactUseCase _deleteContactUseCase;
-
-        public ContactsController(ICreateContactUseCase createContactUseCase, IDeleteContactUseCase deleteContactUseCase)
+        private readonly IGetContactByIdUseCase _getContactByIdUseCase;
+        public ContactsController(
+            ICreateContactUseCase createContactUseCase, 
+            IDeleteContactUseCase deleteContactUseCase,
+            IGetContactByIdUseCase getContactByIdUseCase
+        )
         {
             _createContactUseCase = createContactUseCase;
             _deleteContactUseCase = deleteContactUseCase;
+            _getContactByIdUseCase = getContactByIdUseCase;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateContact([FromBody] CreateContactRequest request)
+        public async Task<IActionResult> CreateContactAsync([FromBody] CreateContactRequest request)
         {
             var input = Mappings.CreateContactMapping.ToInput(request);
             var result = await _createContactUseCase.ExecuteAsync(input);
@@ -45,7 +52,7 @@ namespace ContactsApp.WebAPI.Controllers
         // يعني ايه كرييتد أت أكشن وراح فاتح كوسين ومدخل فنكشن جت باي أي دي 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteContact(int id)
+        public async Task<IActionResult> DeleteContactAsync(int id)
         {
             var result = await _deleteContactUseCase.ExecuteAsync(id);
 
@@ -53,6 +60,25 @@ namespace ContactsApp.WebAPI.Controllers
             {
                 OperationStatus.Success =>
                     NoContent(),
+                OperationStatus.NotFound =>
+                    NotFound(result.ErrorMessage),
+                OperationStatus.ValidationError =>
+                    BadRequest(result.ErrorMessage),
+                OperationStatus.Failure =>
+                    StatusCode(500, result.ErrorMessage),
+                _ => StatusCode(500, "An unexpected error occurred.")
+            };
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetContactByIdAsync(int id)
+        {
+            var result = await _getContactByIdUseCase.ExecuteAsync(id);
+
+            return result.Status switch
+            {
+                OperationStatus.Success =>
+                    Ok(Mappings.GetContactByIdMapping.ToResponse(result.Output!)),
                 OperationStatus.NotFound =>
                     NotFound(result.ErrorMessage),
                 OperationStatus.ValidationError =>

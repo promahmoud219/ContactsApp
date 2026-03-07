@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using System.Net;
 using ContactsApp.Contracts.Contacts.CreateContact;
 using ContactsApp.ConsoleUI.Results;
+using ContactsApp.Contracts.Contacts.GetContactById;
 
 namespace ContactsApp.ConsoleUI.Api
 {
@@ -88,5 +89,45 @@ namespace ContactsApp.ConsoleUI.Api
                     ClientErrorType.Timeout);
             }
         }
+
+        public async Task<ClientResult<GetContactByIdResponse?>> GetContactByIdAsync(int id)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"/api/contacts/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = await response.Content.ReadFromJsonAsync<GetContactByIdResponse>();
+                    return ClientResult<GetContactByIdResponse?>.Success(response.StatusCode, data!);
+                }
+
+                var error = await response.Content.ReadAsStringAsync();
+                var errorType = response.StatusCode switch
+                {
+                    HttpStatusCode.BadRequest => ClientErrorType.Validation,
+                    HttpStatusCode.NotFound => ClientErrorType.NotFound,
+                    HttpStatusCode.Unauthorized => ClientErrorType.Unauthorized,
+                    HttpStatusCode.InternalServerError => ClientErrorType.ServerError,
+                    _ => ClientErrorType.ServerError
+                };
+
+                return ClientResult<GetContactByIdResponse?>.Failure(response.StatusCode, error, errorType);
+            }
+            catch (HttpRequestException)
+            {
+                return ClientResult<GetContactByIdResponse?>.Failure(
+                    HttpStatusCode.ServiceUnavailable,
+                    "Server is not reachable.",
+                    ClientErrorType.NetworkFailure);
+            }
+            catch (TaskCanceledException)
+            {
+                return ClientResult<GetContactByIdResponse?>.Failure(
+                    HttpStatusCode.RequestTimeout,
+                    "Request timed out.",
+                    ClientErrorType.Timeout);
+            }
+        }  
     }
 }

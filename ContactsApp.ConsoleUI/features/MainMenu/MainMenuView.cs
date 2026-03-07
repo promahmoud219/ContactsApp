@@ -7,6 +7,7 @@ namespace ContactsApp.ConsoleUI.Features.MainMenu
         {
             CreateContact = 1,
             DeleteContact = 2,
+            GetContactById = 3,
             Exit = 6,
             Invalid = -1
         }
@@ -22,6 +23,7 @@ namespace ContactsApp.ConsoleUI.Features.MainMenu
             Console.WriteLine("\t\t\tMain Menu");
             Console.WriteLine("1- Create Contact");
             Console.WriteLine("2- Delete Contact");
+            Console.WriteLine("3- Get Contact By Id");
             //Console.WriteLine("3- Update Contact");
             //Console.WriteLine("4- Search Contact");
             //Console.WriteLine("5- Show All Contacts");
@@ -39,6 +41,7 @@ namespace ContactsApp.ConsoleUI.Features.MainMenu
                 {
                     1 => MenuChoice.CreateContact,
                     2 => MenuChoice.DeleteContact,
+                    3 => MenuChoice.GetContactById,
                     _ => MenuChoice.Invalid
                 };
             }

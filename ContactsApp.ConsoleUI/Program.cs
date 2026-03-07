@@ -1,6 +1,7 @@
 ﻿using ContactsApp.ConsoleUI.Application;
 using ContactsApp.ConsoleUI.Features.CreateContact;
 using ContactsApp.ConsoleUI.Features.DeleteContact;
+using ContactsApp.ConsoleUI.Features.GetContactById;
 using ContactsApp.ConsoleUI.Features.MainMenu;
 using ContactsApp.ConsoleUI.Shared;
 using ContactsApp.ConsoleUI.Api; // فيه IContactsApiClient + implementation
@@ -49,6 +50,8 @@ internal class Program
         services.AddTransient<CreateContactView>();
         services.AddTransient<DeleteContactController>();
         services.AddTransient<DeleteContactView>();
+        services.AddTransient<GetContactByIdController>();
+        services.AddTransient<GetContactByIdView>();
 
         services.AddSingleton<ApplicationController>();
 

@@ -34,7 +34,7 @@ namespace ContactsApp.ConsoleUI.Features.CreateContact
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.WriteLine("? Contact Added:");
-            Console.WriteLine($"FullName: {response.FullName}");
+            Console.WriteLine($"FullName: {response.Name}");
             Console.WriteLine($"Phone: {response.Phone}");
             Console.WriteLine($"Email: {response.Email}");
             Console.WriteLine($"Address: {response.Address}");
