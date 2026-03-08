@@ -7,7 +7,7 @@ namespace ContactsApp.Infrastructure.Repositories
 {
     public partial class ContactRepository : IContactRepository
     {
-        public async Task<bool> DeleteContactAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             using var connection = new SqlConnection(DatabaseInitializer.GetConnectionString());
             await connection.OpenAsync();

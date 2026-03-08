@@ -7,7 +7,7 @@ namespace ContactsApp.Infrastructure.Repositories
 {
     public partial class ContactRepository : IContactRepository
     {
-        public async Task<ContactReadModel?> GetContactDetailsByIdAsync(int id)
+        public async Task<ContactReadModel?> GetByIdAsync(int id)
         {
             using var connection = new SqlConnection(DatabaseInitializer.GetConnectionString());
             await connection.OpenAsync();

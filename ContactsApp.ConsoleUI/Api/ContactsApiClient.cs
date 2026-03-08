@@ -1,8 +1,9 @@
 using System.Net.Http.Json;
 using System.Net;
 using ContactsApp.Contracts.Contacts.CreateContact;
-using ContactsApp.ConsoleUI.Results;
 using ContactsApp.Contracts.Contacts.GetContactById;
+using ContactsApp.Contracts.Contacts.UpdateContact;
+using ContactsApp.ConsoleUI.Results;
 
 namespace ContactsApp.ConsoleUI.Api
 {
@@ -128,6 +129,44 @@ namespace ContactsApp.ConsoleUI.Api
                     "Request timed out.",
                     ClientErrorType.Timeout);
             }
-        }  
-    }
+        }
+
+        // The UpdateContactAsync method will be implemented similarly to the CreateContactAsync and DeleteContactAsync methods, following the same pattern for error handling and response processing.
+
+        public async Task<ClientResult<UpdateContactResponse?>> UpdateContactAsync(UpdateContactRequest request)
+        {
+            try
+            {
+                var response = await _httpClient.PutAsJsonAsync($"/api/contacts/{request.ContactId}", request);
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = await response.Content.ReadFromJsonAsync<UpdateContactResponse>();
+                    return ClientResult<UpdateContactResponse?>.Success(response.StatusCode, data!);
+                }
+                var error = await response.Content.ReadAsStringAsync();
+                var errorType = response.StatusCode switch
+                {
+                    HttpStatusCode.BadRequest => ClientErrorType.Validation,
+                    HttpStatusCode.NotFound => ClientErrorType.NotFound,
+                    HttpStatusCode.Unauthorized => ClientErrorType.Unauthorized,
+                    HttpStatusCode.InternalServerError => ClientErrorType.ServerError,
+                    _ => ClientErrorType.ServerError
+                };
+                return ClientResult<UpdateContactResponse?>.Failure(response.StatusCode, error, errorType);
+            }
+            catch (HttpRequestException)
+            {
+                return ClientResult<UpdateContactResponse?>.Failure(
+                    HttpStatusCode.ServiceUnavailable,
+                    "Server is not reachable.",
+                    ClientErrorType.NetworkFailure);
+            }
+            catch (TaskCanceledException)
+            {
+                return ClientResult<UpdateContactResponse?>.Failure(
+                    HttpStatusCode.RequestTimeout,
+                    "Request timed out.",
+                    ClientErrorType.Timeout);
+            }
+        }
 }

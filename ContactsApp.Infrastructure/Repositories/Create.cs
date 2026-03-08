@@ -7,7 +7,7 @@ namespace ContactsApp.Infrastructure.Repositories
 {
     public partial class ContactRepository : IContactRepository
     {
-        public async Task CreateContactAsync(Contact contact)
+        public async Task CreateAsync(Contact contact)
         {
             using var connection = new SqlConnection(DatabaseInitializer.GetConnectionString());
             await connection.OpenAsync();

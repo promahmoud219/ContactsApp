@@ -1,38 +1,28 @@
-/*
-using ContactsApp.ConsoleUI.Views;
-using ContactsApp.Core.contacts.entities;
-using ContactsApp.Core.contacts.use_cases;
-using ContactsApp.ConsoleUI.Presenters;
+using ContactsApp.ConsoleUI.Api;
+using ContactsApp.ConsoleUI.Results;
+using ContactsApp.Contracts.Contacts.UpdateContact;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace ContactsApp.ConsoleUI.Features.UpdateContact
 {
     public class UpdateContactController
     {
-        private readonly IUpdateContactView _view;
-        private readonly UpdateContactUseCase _useCase;
-        private readonly UpdateContactPresenter _presenter;
+        private readonly IContactsApiClient _api;
+        private readonly UpdateContactView _view;
 
-        public UpdateContactController(
-            IUpdateContactView view,
-            UpdateContactUseCase useCase,
-            UpdateContactPresenter presenter)
+        public UpdateContactController(IContactsApiClient api, UpdateContactView view)
         {
-            _view = view;
-            _useCase = useCase;
-            _presenter = presenter;
+            _api = api ?? throw new ArgumentNullException(nameof(api));
+            _view = view ?? throw new ArgumentNullException(nameof(view));
         }
 
-        public void Run()
+        public async Task<ClientResult<UpdateContactResponse?>> RunAsync()
         {
-            string nameToUpdate = _view.GetContactNameToUpdate();
-
-            var updatedData = _view.GetUpdatedData();
-
-            bool success = _useCase.Execute(nameToUpdate, updatedData);
-
-            _presenter.ShowUpdateResult(success, nameToUpdate);
+            var request = _view.Render();
+            var result = await _api.UpdateContactAsync(request);
+            return result;
         }
     }
 }
-
-*/

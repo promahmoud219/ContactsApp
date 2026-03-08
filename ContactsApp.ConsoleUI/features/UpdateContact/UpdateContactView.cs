@@ -1,48 +1,47 @@
-/*
-using ContactsApp.Core.contacts.entities;
+using ContactsApp.Contracts.Contacts.UpdateContact;
 
 namespace ContactsApp.ConsoleUI.Features.UpdateContact
 {
-    public interface IUpdateContactView
+    public class UpdateContactView
     {
-        string GetContactNameToUpdate();
-        Contact GetUpdatedData();
-        void ShowMessage(string message);
-    }
-
-    public class UpdateContactView : IUpdateContactView
-    {
-        public string GetContactNameToUpdate()
+        public UpdateContactRequest Render()
         {
-            Console.Write("?? Enter the name of the contact to update: ");
-            return Console.ReadLine() ?? string.Empty;
+            Console.WriteLine("\n=== Update Contact ===\n");
+
+
+            // right now we are taking the Id from the user here, but 
+            // i will take the Id from GetContactById. because, first, the user enters the Id ,
+            // then we will show the contact details, will confirm 
+            // then the user can update the details and then we will send the update request to the server.
+
+            Console.Write("Enter Contact ID: ");
+            int.TryParse(Console.ReadLine(), out var contactId);
+
+            Console.Write("Enter FirstName: ");
+            var firstName = Console.ReadLine() ?? string.Empty;
+
+            Console.Write("Enter LastName: ");
+            var lastName = Console.ReadLine() ?? string.Empty;
+
+            Console.Write("Enter Phone: ");
+            var phone = Console.ReadLine() ?? string.Empty;
+
+            Console.Write("Enter Email (optional): ");
+            var email = Console.ReadLine();
+
+            return new UpdateContactRequest(contactId, firstName, lastName, phone, email);
         }
 
-        public Contact GetUpdatedData()
+        public void ShowContactRecord(UpdateContactResponse response)
         {
-            Console.WriteLine("\nEnter new data (leave blank to keep current value):");
-            Console.Write("Name: ");
-            string name = Console.ReadLine() ?? string.Empty;
+            Console.ForegroundColor = ConsoleColor.Green;
 
-            Console.Write("Phone: ");
-            string phone = Console.ReadLine() ?? string.Empty;
+            Console.WriteLine("? Contact Updated:");
+            Console.WriteLine($"FullName: {response.Name}");
+            Console.WriteLine($"Phone: {response.Phone}");
+            Console.WriteLine($"Email: {response.Email}");
 
-            Console.Write("Email: ");
-            string email = Console.ReadLine() ?? string.Empty;
-
-            return new Contact
-            {
-                Name = string.IsNullOrWhiteSpace(name) ? null : name,
-                Phone = string.IsNullOrWhiteSpace(phone) ? null : phone,
-                Email = string.IsNullOrWhiteSpace(email) ? null : email
-            };
-        }
-
-        public void ShowMessage(string message)
-        {
-            Console.WriteLine(message);
+            Console.ResetColor();
         }
     }
 }
-
-*/
