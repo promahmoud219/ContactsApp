@@ -1,12 +1,14 @@
 ﻿using ContactsApp.Core.Contacts.Interfaces; 
 using ContactsApp.Core.Contacts.UseCases.CreateContact;
 using ContactsApp.Core.Contacts.UseCases.DeleteContact;
+using ContactsApp.Core.Contacts.UseCases.UpdateContact;
 using ContactsApp.Core.Contacts.UseCases.GetContactById;
 using ContactsApp.Contracts.Contacts.CreateContact;
 using ContactsApp.Core.Shared;
 using ContactsApp.WebAPI.Mappings;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Contracts;
 
 namespace ContactsApp.WebAPI.Controllers
 {
@@ -17,15 +19,18 @@ namespace ContactsApp.WebAPI.Controllers
         private readonly ICreateContactUseCase _createContactUseCase;
         private readonly IDeleteContactUseCase _deleteContactUseCase;
         private readonly IGetContactByIdUseCase _getContactByIdUseCase;
+        private readonly IUpdateContactUseCase _updateContactUseCase;
         public ContactsController(
             ICreateContactUseCase createContactUseCase, 
             IDeleteContactUseCase deleteContactUseCase,
-            IGetContactByIdUseCase getContactByIdUseCase
+            IGetContactByIdUseCase getContactByIdUseCase,
+            IUpdateContactUseCase updateContactUseCase
         )
         {
             _createContactUseCase = createContactUseCase;
             _deleteContactUseCase = deleteContactUseCase;
             _getContactByIdUseCase = getContactByIdUseCase;
+            _updateContactUseCase = updateContactUseCase;
         }
 
         [HttpPost]
@@ -47,9 +52,7 @@ namespace ContactsApp.WebAPI.Controllers
                 _ => StatusCode(500, "An unexpected error occurred.")
             };
         }
-
-        // edit takes the object and id, to insure that the user wants to change this id 
-        // يعني ايه كرييتد أت أكشن وراح فاتح كوسين ومدخل فنكشن جت باي أي دي 
+         // يعني ايه كرييتد أت أكشن وراح فاتح كوسين ومدخل فنكشن جت باي أي دي 
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContactAsync(int id)
@@ -88,5 +91,27 @@ namespace ContactsApp.WebAPI.Controllers
                 _ => StatusCode(500, "An unexpected error occurred.")
             };
         }
-    }
+
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateContactAsync(int id, [FromBody] UpdateContactRequest request)
+        {
+            if (id != request.Id)
+                return BadRequest("ID in the URL does not match ID in the request body.");
+
+            var input = Mappings.UpdateContactMapping.ToInput(request, id);
+            var result = await _updateContactUseCase.ExecuteAsync(input);
+            
+            return result.Status switch
+            {
+                OperationStatus.Success =>
+                    NoContent(),
+                OperationStatus.NotFound =>
+                    NotFound(result.ErrorMessage), 
+                OperationStatus.Failure =>
+                    StatusCode(500, result.ErrorMessage),
+                _ => StatusCode(500, "An unexpected error occurred.")
+            };
+
+        }
 }

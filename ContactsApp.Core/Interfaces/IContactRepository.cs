@@ -6,9 +6,9 @@ namespace ContactsApp.Core.Contacts.Interfaces
 {
     public interface IContactRepository
     {
-        Task CreateAsync(Contact contact);
-        Task<bool> DeleteAsync(int id);
-        Task<ContactReadModel?> GetByIdAsync(int id);
+        Task<int> CreateAsync(Contact contact);
+        Task DeleteAsync(int ContactId);
+        Task<ContactReadModel?> GetByIdAsync(int ContactId);
         Task UpdateAsync(Contact contact);
 
         //IEnumerable<Contact> SearchContacts(SearchContactsInput input);

@@ -1,4 +1,4 @@
-// i don't need it , as sama as delete useCase
+// i don't need it , like delete useCase
 //namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
 //{
 //    public record UpdateContactOutput(

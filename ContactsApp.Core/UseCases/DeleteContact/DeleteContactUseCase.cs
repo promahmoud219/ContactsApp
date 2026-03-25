@@ -13,9 +13,9 @@ namespace ContactsApp.Core.Contacts.UseCases.DeleteContact
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
-        public async Task<OperationResult<bool>> ExecuteAsync(int id)
+        public async Task<OperationResult<bool>> ExecuteAsync(int ContactId)
         {
-            var deleted = await _repository.DeleteContactAsync(id);
+            var deleted = await _repository.DeleteContactAsync(ContactId);
 
             if (!deleted)
                 return OperationResult<bool>.NotFound("Contact not found");

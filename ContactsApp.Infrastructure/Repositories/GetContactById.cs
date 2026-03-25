@@ -7,7 +7,7 @@ namespace ContactsApp.Infrastructure.Repositories
 {
     public partial class ContactRepository : IContactRepository
     {
-        public async Task<ContactReadModel?> GetByIdAsync(int id)
+        public async Task<ContactReadModel?> GetByIdAsync(int ContactId)
         {
             using var connection = new SqlConnection(DatabaseInitializer.GetConnectionString());
             await connection.OpenAsync();
@@ -15,11 +15,11 @@ namespace ContactsApp.Infrastructure.Repositories
             const string query = @"
         SELECT c.ContactId, c.FirstName, c.LastName, c.Phone, co.CountryName AS Country
         FROM Contacts c
-        JOIN Countries co ON c.CountryId = co.Id
-        WHERE c.ContactId = @Id";
+        JOIN Countries co ON c.CountryId = co.ContactId
+        WHERE c.ContactId = @ContactId";
 
             using var cmd = new SqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@Id", id);
+            cmd.Parameters.AddWithValue("@ContactId", ContactId);
 
             using var reader = await cmd.ExecuteReaderAsync();
 

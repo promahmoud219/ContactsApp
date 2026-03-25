@@ -84,6 +84,7 @@ namespace ContactsApp.ConsoleUI.Application
                 // now it's commented till i implement it. 
                 // or i can do this instead: await NavigateToAfterAdd();
                 //await _showAllContactsController.RunAsync();
+                // i'll send an email notification to the user after adding a new contact, but for now, it's just a placeholder.
             }
 
             switch (result.ErrorType)
@@ -136,8 +137,6 @@ namespace ContactsApp.ConsoleUI.Application
         private async Task HandleDeleteContactFlow()
         {
             var result = await _deleteController.RunAsync();
-            
-            
             
             if (result.IsSuccess)
             {

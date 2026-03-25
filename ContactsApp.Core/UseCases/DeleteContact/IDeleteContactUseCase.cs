@@ -6,6 +6,6 @@ namespace ContactsApp.Core.Contacts.UseCases.DeleteContact
 {
     public interface IDeleteContactUseCase
     {
-        Task<OperationResult<bool>> ExecuteAsync(int id);
+        Task<OperationResult<bool>> ExecuteAsync(int ContactId);
     }
 }

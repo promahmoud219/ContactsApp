@@ -9,6 +9,5 @@ namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
     public interface IUpdateContactUseCase
     {
         Task<OperationResult<NoContent>> ExecuteAsync(UpdateContactInput input);
-
     }
 }

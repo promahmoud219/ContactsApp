@@ -2,7 +2,7 @@ namespace ContactsApp.Contracts.Contacts.CreateContact
 {
     public record CreateContactResponse
     (
-        int Id,
+        int ContactId,
         string Name,
         string Phone,
         string? Email,

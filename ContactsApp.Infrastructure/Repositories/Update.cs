@@ -17,19 +17,27 @@ namespace ContactsApp.Infrastructure.Repositories
                                     LastName = @LastName, 
                                     Phone = @Phone, 
                                     Email = @Email 
-                                WHERE ContactId = @Id;";
+                                WHERE ContactId = @ContactId;";
 
             using var cmd = new SqlCommand(query, connection);
 
-            cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier).Value = contact.Id;
+            cmd.Parameters.Add("@ContactId", SqlDbType.UniqueIdentifier).Value = contact.ContactId;
             cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar, 50).Value = contact.FirstName;
             cmd.Parameters.Add("@LastName", SqlDbType.NVarChar, 50).Value = contact.LastName;
             cmd.Parameters.Add("@Phone", SqlDbType.NVarChar, 20).Value = contact.Phone;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = (object?)contact.Email ?? DBNull.Value;
 
+            // i will continue row version later
+            // ??????? ?? ?? ????? ?????? ?????
+            // https://chatgpt.com/s/t_69c3dc31441c8191a8b78c239153b53f
+            //cmd.Parameters.Add("@RowVersion", SqlDbType.Timestamp).Value = contact.RowVersion;
 
-            var rowsAffected = await cmd.ExecuteNonQueryAsync();
-            return rowsAffected > 0;
+
+            var rows = await cmd.ExecuteNonQueryAsync();
+
+            if (!rows)
+                throw new NotFoundException($"Contact {contact.ContactId} not found");
+
         }
     }
 }

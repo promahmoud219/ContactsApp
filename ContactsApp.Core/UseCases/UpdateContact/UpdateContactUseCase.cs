@@ -13,6 +13,7 @@ namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
+
         public async Task<OperationResult<NoContent>> ExecuteAsync(UpdateContactInput input)
         {
             if (input is null)
@@ -26,8 +27,7 @@ namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
                     input.Phone, 
                     input.Email
                 );
-
-                await _repository.UpdateContactAsync(contact);
+                await _repository.UpdateAsync( contact ); 
 
                 return new OperationResult<NoContent>
                 (
