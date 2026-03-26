@@ -21,7 +21,7 @@ namespace ContactsApp.ConsoleUI.Features.UpdateContact
         public async Task<ClientResult<UpdateContactResponse?>> RunAsync()
         {
             var request = _view.Render();
-            return await _api.UpdateContactAsync(request);
+            return await _api.UpdateContactAsync(request.Id, request);
         }
     }
 }

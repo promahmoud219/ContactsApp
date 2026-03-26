@@ -21,7 +21,7 @@ namespace ContactsApp.ConsoleUI.Features.DeleteContact
 
         public async Task<ClientResult<NoContent>> RunAsync()
         {
-            int id = _view.GetContactId();
+            int id = _view.GetId();
 
             var contactResult = await _api.GetContactByIdAsync(id);
 

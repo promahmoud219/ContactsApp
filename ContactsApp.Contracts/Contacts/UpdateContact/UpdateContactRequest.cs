@@ -2,7 +2,7 @@ namespace ContactsApp.Contracts.Contacts.UpdateContact
 {
     public record UpdateContactRequest  
     (
-        int  ContactId,
+        int Id,
         string FirstName,
         string LastName,
         string Phone,

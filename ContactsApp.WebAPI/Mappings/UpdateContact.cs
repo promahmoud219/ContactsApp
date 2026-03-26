@@ -16,24 +16,10 @@ namespace ContactsApp.WebAPI.Mappings
                 request.FirstName,
                 request.LastName,
                 request.Phone,
-                request.Email,
-                request.Address,
-                request.CountryId
+                request.Email
             );
         }
-
-        public static UpdateContactResponse ToResponse(UpdateContactOutput output)
-        {
-            if (output is null)
-                throw new ArgumentNullException(nameof(output));
-
-            return new UpdateContactResponse(
-                output.ContactId,
-                $"{output.FirstName} {output.LastName}",
-                output.Phone,
-                output?.Email
-            );
-        }
+ 
     }
                  
 }   

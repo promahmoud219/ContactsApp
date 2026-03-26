@@ -1,7 +1,7 @@
 namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
 {   
     public record UpdateContactInput(
-        int ContactId,
+        int Id,
         string FirstName,
         string LastName,
         string Phone,

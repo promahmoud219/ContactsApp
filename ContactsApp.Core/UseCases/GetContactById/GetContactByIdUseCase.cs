@@ -15,9 +15,9 @@ namespace ContactsApp.Core.Contacts.UseCases.GetContactById
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task<OperationResult<GetContactByIdOutput>> ExecuteAsync(int ContactId)
+        public async Task<OperationResult<GetContactByIdOutput>> ExecuteAsync(int id)
         { 
-            var ContactReadModel = await _repository.GetContactDetailsByIdAsync(ContactId);
+            var ContactReadModel = await _repository.GetContactByIdAsync(id);
             if (ContactReadModel is null)
                 return OperationResult<GetContactByIdOutput>.NotFound("Contact not found");
 
@@ -28,7 +28,7 @@ namespace ContactsApp.Core.Contacts.UseCases.GetContactById
         GetContactByIdOutput MapContactToOutput(ContactReadModel c)
         {
             return new GetContactByIdOutput(
-                c.ContactId,
+                c.Id,
                 $"{c.FirstName} {c.LastName}",
                 c.Phone,
                 c.Country

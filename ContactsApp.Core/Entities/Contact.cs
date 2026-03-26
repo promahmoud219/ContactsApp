@@ -2,16 +2,27 @@ namespace ContactsApp.Core.Contacts.Entities
 {
     public class Contact
     {
-        public int ContactId { get; private set; }
+        public int Id { get; private set; }
         public string FirstName { get; private set; } 
         public string LastName { get; private set; }
         public string Phone { get; private set; }
         public string? Email { get; private set; }
         public string? Address { get; private set; }
         public int CountryId { get; private set; }
-        
+
         public Contact(string firstName, string lastName, string phone, string? email = null, string? address = null, int countryId = 0)
         {
+            SetFirstName(firstName);
+            SetLastName(lastName);
+            SetPhone(phone);
+            SetEmail(email);
+            SetAddress(address);
+            SetCountryId(countryId);
+        }
+        // for update feature, we need to set the Id as well
+        public Contact(int Id, string firstName, string lastName, string phone, string? email = null, string? address = null, int countryId = 0)
+        {
+            this.Id = Id;
             SetFirstName(firstName);
             SetLastName(lastName);
             SetPhone(phone);

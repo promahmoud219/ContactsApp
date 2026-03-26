@@ -2,6 +2,10 @@ using ContactsApp.Core.Contacts.Entities;
 using ContactsApp.Core.Contacts.Interfaces;
 using Microsoft.Data.SqlClient;
 using ContactsApp.Infrastructure.Data;
+using System.Data;
+using ContactsApp.Core.Shared.Exceptions;
+
+
 
 namespace ContactsApp.Infrastructure.Repositories
 {
@@ -12,16 +16,17 @@ namespace ContactsApp.Infrastructure.Repositories
             using var connection = new SqlConnection(DatabaseInitializer.GetConnectionString());
             await connection.OpenAsync();
 
-            const string query = @"UPDATE Contacts 
-                                SET FirstName = @FirstName, 
-                                    LastName = @LastName, 
-                                    Phone = @Phone, 
-                                    Email = @Email 
-                                WHERE ContactId = @ContactId;";
+            const string query = @"
+            UPDATE Contacts 
+            SET FirstName = @FirstName, 
+                LastName = @LastName, 
+                Phone = @Phone, 
+                Email = @Email 
+            WHERE Id = @id;";
 
             using var cmd = new SqlCommand(query, connection);
 
-            cmd.Parameters.Add("@ContactId", SqlDbType.UniqueIdentifier).Value = contact.ContactId;
+            cmd.Parameters.Add("@id", SqlDbType.Int).Value = contact.Id;
             cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar, 50).Value = contact.FirstName;
             cmd.Parameters.Add("@LastName", SqlDbType.NVarChar, 50).Value = contact.LastName;
             cmd.Parameters.Add("@Phone", SqlDbType.NVarChar, 20).Value = contact.Phone;
@@ -35,8 +40,8 @@ namespace ContactsApp.Infrastructure.Repositories
 
             var rows = await cmd.ExecuteNonQueryAsync();
 
-            if (!rows)
-                throw new NotFoundException($"Contact {contact.ContactId} not found");
+            if (rows == 0)
+                throw new NotFoundException($"Contact {contact.Id} not found");
 
         }
     }

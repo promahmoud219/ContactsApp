@@ -7,8 +7,8 @@ namespace ContactsApp.Core.Contacts.Interfaces
     public interface IContactRepository
     {
         Task<int> CreateAsync(Contact contact);
-        Task DeleteAsync(int ContactId);
-        Task<ContactReadModel?> GetByIdAsync(int ContactId);
+        Task DeleteAsync(int id);
+        Task<ContactReadModel?> GetContactByIdAsync(int id);
         Task UpdateAsync(Contact contact);
 
         //IEnumerable<Contact> SearchContacts(SearchContactsInput input);

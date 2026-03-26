@@ -21,7 +21,7 @@ namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
             try
             {
                 var contact = new Contact(
-                    input.ContactId,
+                    input.Id,
                     input.FirstName, 
                     input.LastName, 
                     input.Phone, 

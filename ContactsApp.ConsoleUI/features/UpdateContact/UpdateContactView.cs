@@ -8,14 +8,8 @@ namespace ContactsApp.ConsoleUI.Features.UpdateContact
         {
             Console.WriteLine("\n=== Update Contact ===\n");
 
-
-            // right now we are taking the Id from the user here, but 
-            // i will take the Id from GetContactById. because, first, the user enters the Id ,
-            // then we will show the contact details, will confirm 
-            // then the user can update the details and then we will send the update request to the server.
-
             Console.Write("Enter Contact ID: ");
-            int.TryParse(Console.ReadLine(), out var contactId);
+            int.TryParse(Console.ReadLine(), out var id);
 
             Console.Write("Enter FirstName: ");
             var firstName = Console.ReadLine() ?? string.Empty;
@@ -29,19 +23,8 @@ namespace ContactsApp.ConsoleUI.Features.UpdateContact
             Console.Write("Enter Email (optional): ");
             var email = Console.ReadLine();
 
-            return new UpdateContactRequest(contactId, firstName, lastName, phone, email);
+            return new UpdateContactRequest(id, firstName, lastName, phone, email?.Trim());
         }
-
-        public void ShowContactRecord(UpdateContactResponse response)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-
-            Console.WriteLine("? Contact Updated:");
-            Console.WriteLine($"FullName: {response.Name}");
-            Console.WriteLine($"Phone: {response.Phone}");
-            Console.WriteLine($"Email: {response.Email}");
-
-            Console.ResetColor();
-        }
+ 
     }
 }

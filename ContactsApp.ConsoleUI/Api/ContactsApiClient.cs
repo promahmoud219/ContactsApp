@@ -133,15 +133,19 @@ namespace ContactsApp.ConsoleUI.Api
 
         // The UpdateContactAsync method will be implemented similarly to the CreateContactAsync and DeleteContactAsync methods, following the same pattern for error handling and response processing.
 
-        public async Task<ClientResult<UpdateContactResponse?>> UpdateContactAsync(UpdateContactRequest request)
+        public async Task<ClientResult<UpdateContactResponse?>> UpdateContactAsync(int id, UpdateContactRequest request)
         {
             try
             {
-                var response = await _httpClient.PutAsJsonAsync($"/api/contacts/{request.ContactId}", request);
+                var response = await _httpClient.PutAsJsonAsync($"/api/contacts/{id}", request);
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    var data = await response.Content.ReadFromJsonAsync<UpdateContactResponse>();
+                //    return ClientResult<UpdateContactResponse?>.Success(response.StatusCode, data!);
+                //}
                 if (response.IsSuccessStatusCode)
                 {
-                    var data = await response.Content.ReadFromJsonAsync<UpdateContactResponse>();
-                    return ClientResult<UpdateContactResponse?>.Success(response.StatusCode, data!);
+                    return ClientResult<UpdateContactResponse?>.Success(response.StatusCode, null);
                 }
                 var error = await response.Content.ReadAsStringAsync();
                 var errorType = response.StatusCode switch
@@ -169,4 +173,5 @@ namespace ContactsApp.ConsoleUI.Api
                     ClientErrorType.Timeout);
             }
         }
+    }
 }

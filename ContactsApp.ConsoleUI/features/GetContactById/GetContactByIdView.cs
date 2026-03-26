@@ -7,11 +7,11 @@ namespace ContactsApp.ConsoleUI.Features.GetContactById
 {
     public class GetContactByIdView
     {
-        public int GetContactId()
+        public int GetId()
         {
             Console.Write("Get Contact Info By ID: ");
-            int.TryParse(Console.ReadLine(), out int contactId);
-            return contactId;
+            int.TryParse(Console.ReadLine(), out int id);
+            return id;
         }
 
 
@@ -19,7 +19,7 @@ namespace ContactsApp.ConsoleUI.Features.GetContactById
         {
             // i wanna display the contact record here 
 
-            Console.WriteLine($"ContactId: {response.Id} "); 
+            Console.WriteLine($"Id: {response.Id} "); 
             Console.WriteLine($"Name: {response.Name} "); 
             Console.WriteLine($"Phone: {response.Phone} "); 
             Console.WriteLine($"Country: {response.Country} "); 

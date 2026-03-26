@@ -14,19 +14,36 @@ namespace ContactsApp.ConsoleUI.Results
         NetworkFailure,
         Timeout
     }
-    public record ClientResult<T>( 
-        bool IsSuccess,
-        HttpStatusCode StatusCode,
-        T? Data = default, 
-        string? ErrorMessage = null,
-        ClientErrorType ErrorType = ClientErrorType.None
-    )
-    {
-        public static ClientResult<T> Success(HttpStatusCode code, T data) => new(true, code, data);
 
-        // tfor cases where we want to indicate success but don't have data to return, e.g. after a successful delete operation
-        public static ClientResult<T> Success(HttpStatusCode code) => new(true, code);
-        
-        public static ClientResult<T> Failure(HttpStatusCode code, string error, ClientErrorType errorType) => new(false, code, default, error, errorType);
+    public class ClientResult<T>
+    {
+        public bool IsSuccess { get; }
+        public HttpStatusCode StatusCode { get; }
+        public T? Data { get; }
+        public string? ErrorMessage { get; }
+        public ClientErrorType ErrorType { get; }
+
+        private ClientResult(
+            bool isSuccess,
+            HttpStatusCode statusCode,
+            T? data = default,
+            string? errorMessage = null,
+            ClientErrorType errorType = ClientErrorType.None)
+        {
+            IsSuccess = isSuccess;
+            StatusCode = statusCode;
+            Data = data;
+            ErrorMessage = errorMessage;
+            ErrorType = errorType;
+        }
+
+        public static ClientResult<T> Success(HttpStatusCode code, T data) =>
+            new(true, code, data);
+
+        public static ClientResult<T> Success(HttpStatusCode code) =>
+            new(true, code);
+
+        public static ClientResult<T> Failure(HttpStatusCode code, string error, ClientErrorType errorType) =>
+            new(false, code, default, error, errorType);
     }
 }

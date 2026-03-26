@@ -4,6 +4,7 @@ using ContactsApp.Core.Contacts.UseCases.DeleteContact;
 using ContactsApp.Core.Contacts.UseCases.UpdateContact;
 using ContactsApp.Core.Contacts.UseCases.GetContactById;
 using ContactsApp.Contracts.Contacts.CreateContact;
+using ContactsApp.Contracts.Contacts.UpdateContact;
 using ContactsApp.Core.Shared;
 using ContactsApp.WebAPI.Mappings;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace ContactsApp.WebAPI.Controllers
         private readonly IGetContactByIdUseCase _getContactByIdUseCase;
         private readonly IUpdateContactUseCase _updateContactUseCase;
         public ContactsController(
-            ICreateContactUseCase createContactUseCase, 
+            ICreateContactUseCase createContactUseCase,
             IDeleteContactUseCase deleteContactUseCase,
             IGetContactByIdUseCase getContactByIdUseCase,
             IUpdateContactUseCase updateContactUseCase
@@ -42,7 +43,10 @@ namespace ContactsApp.WebAPI.Controllers
             return result.Status switch
             {
                 OperationStatus.Success =>
-                    Created("", Mappings.CreateContactMapping.ToResponse(result.Output!)),
+                    CreatedAtAction(
+                        nameof(GetContactByIdAsync),
+                        new { id = result.Output!.Id },
+                        Mappings.CreateContactMapping.ToResponse(result.Output!)),
                 OperationStatus.ValidationError =>
                     BadRequest(result.ErrorMessage),
                 OperationStatus.NotFound =>
@@ -52,7 +56,6 @@ namespace ContactsApp.WebAPI.Controllers
                 _ => StatusCode(500, "An unexpected error occurred.")
             };
         }
-         // يعني ايه كرييتد أت أكشن وراح فاتح كوسين ومدخل فنكشن جت باي أي دي 
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContactAsync(int id)
@@ -92,26 +95,27 @@ namespace ContactsApp.WebAPI.Controllers
             };
         }
 
-        
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContactAsync(int id, [FromBody] UpdateContactRequest request)
         {
             if (id != request.Id)
-                return BadRequest("ID in the URL does not match ID in the request body.");
+                return BadRequest("Id in the URL does not match Id in the request body.");
 
             var input = Mappings.UpdateContactMapping.ToInput(request, id);
             var result = await _updateContactUseCase.ExecuteAsync(input);
-            
+
             return result.Status switch
             {
                 OperationStatus.Success =>
                     NoContent(),
                 OperationStatus.NotFound =>
-                    NotFound(result.ErrorMessage), 
+                    NotFound(result.ErrorMessage),
                 OperationStatus.Failure =>
                     StatusCode(500, result.ErrorMessage),
                 _ => StatusCode(500, "An unexpected error occurred.")
             };
 
         }
+    }
 }

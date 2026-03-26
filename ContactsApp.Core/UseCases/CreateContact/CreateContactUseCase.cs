@@ -28,7 +28,7 @@ namespace ContactsApp.Core.Contacts.UseCases.CreateContact
                     input.CountryId
                 );
 
-                await _repository.CreateContactAsync(contact);
+                await _repository.CreateAsync(contact);
 
                 var output = new CreateContactOutput(
                     contact.Id,
