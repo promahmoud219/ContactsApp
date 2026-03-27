@@ -22,8 +22,11 @@ namespace ContactsApp.ConsoleUI.Features.UpdateContact
 
             Console.Write("Enter Email (optional): ");
             var email = Console.ReadLine();
+            
+            Console.Write("Enter Country ID: ");
+            int.TryParse(Console.ReadLine(), out var countryId);
 
-            return new UpdateContactRequest(id, firstName, lastName, phone, email?.Trim());
+            return new UpdateContactRequest(id, firstName, lastName, phone, email?.Trim(), countryId);
         }
  
     }

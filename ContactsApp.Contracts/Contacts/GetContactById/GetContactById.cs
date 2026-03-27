@@ -4,6 +4,6 @@ namespace ContactsApp.Contracts.Contacts.GetContactById
         int Id,
         string Name,
         string Phone,  
-        string Country 
+        string CountryId
     );
 }

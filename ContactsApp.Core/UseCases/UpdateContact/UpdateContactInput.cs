@@ -5,6 +5,7 @@ namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
         string FirstName,
         string LastName,
         string Phone,
-        string? Email
+        string? Email,
+        int CountryId
     );
 }                   

@@ -25,7 +25,8 @@ namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
                     input.FirstName, 
                     input.LastName, 
                     input.Phone, 
-                    input.Email
+                    input.Email, 
+                    input.CountryId
                 );
                 await _repository.UpdateAsync( contact ); 
 
