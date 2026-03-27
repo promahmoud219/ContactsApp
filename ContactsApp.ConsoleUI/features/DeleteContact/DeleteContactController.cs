@@ -23,17 +23,18 @@ namespace ContactsApp.ConsoleUI.Features.DeleteContact
         {
             int id = _view.GetId();
 
-            var contactResult = await _api.GetContactByIdAsync(id);
+            // it was a mistake to call GetContactByIdAsync here
+            //var contactResult = await _api.GetContactByIdAsync(id);
 
-            if (!contactResult.IsSuccess || contactResult.Data is null)
-            {
-                return ClientResult<NoContent>.Failure(
-                    contactResult.StatusCode,
-                    contactResult.ErrorMessage,
-                    contactResult.ErrorType);
-            }
+            //if (!contactResult.IsSuccess || contactResult.Data is null)
+            //{
+            //    return ClientResult<NoContent>.Failure(
+            //        contactResult.StatusCode,
+            //        contactResult.ErrorMessage ?? "Unknown error",
+            //        contactResult.ErrorType);
+            //}
 
-            _view.DisplayContact(contactResult.Data);
+            //_view.DisplayContact(contactResult.Data);
 
             var confirmed = _view.ConfirmDelete(id);
 

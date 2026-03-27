@@ -16,7 +16,9 @@ namespace ContactsApp.WebAPI.Mappings
                 request.FirstName,
                 request.LastName,
                 request.Phone,
-                request.Email
+                request.Email,
+                request.Address,
+                request.CountryId
             );
         }
  

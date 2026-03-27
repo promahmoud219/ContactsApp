@@ -31,7 +31,9 @@ namespace ContactsApp.Core.Contacts.UseCases.GetContactById
                 c.Id,
                 $"{c.FirstName} {c.LastName}",
                 c.Phone,
-                c.Country
+                c?.Email,
+                c?.Address,
+                c.CountryName
             );
         }
     }

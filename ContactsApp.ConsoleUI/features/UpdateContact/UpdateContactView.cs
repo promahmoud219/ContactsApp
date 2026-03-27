@@ -22,11 +22,14 @@ namespace ContactsApp.ConsoleUI.Features.UpdateContact
 
             Console.Write("Enter Email (optional): ");
             var email = Console.ReadLine();
+
+            Console.Write("Enter Address (optional): ");
+            var address = Console.ReadLine();
             
             Console.Write("Enter Country ID: ");
             int.TryParse(Console.ReadLine(), out var countryId);
 
-            return new UpdateContactRequest(id, firstName, lastName, phone, email?.Trim(), countryId);
+            return new UpdateContactRequest(id, firstName, lastName, phone, email?.Trim(), address?.Trim(), countryId);
         }
  
     }

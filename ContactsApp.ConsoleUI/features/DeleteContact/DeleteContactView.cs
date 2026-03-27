@@ -58,7 +58,7 @@ namespace ContactsApp.ConsoleUI.Features.DeleteContact
             Console.WriteLine($"Id: {contact.Id}");
             Console.WriteLine($"Name: {contact.Name}");
             Console.WriteLine($"Phone: {contact.Phone}");
-            Console.WriteLine($"Country: {contact.Country}");
+            Console.WriteLine($"Country: {contact.CountryId}");
         }
     }
 }

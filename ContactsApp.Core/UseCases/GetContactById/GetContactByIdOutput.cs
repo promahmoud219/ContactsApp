@@ -4,6 +4,8 @@ namespace ContactsApp.Core.Contacts.UseCases.GetContactById
         int Id,
         string FullName,
         string Phone,
-        string Country
+        string? Email,
+        string? Address,
+        string CountryName
     );
 }

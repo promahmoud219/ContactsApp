@@ -10,7 +10,7 @@ namespace ContactsApp.ConsoleUI.Api
     public class ContactsApiClient : IContactsApiClient
     {
         private readonly HttpClient _httpClient;
-
+         
         public ContactsApiClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -41,11 +41,11 @@ namespace ContactsApp.ConsoleUI.Api
 
                 return ClientResult<CreateContactResponse?>.Failure(response.StatusCode, error, errorType);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 return ClientResult<CreateContactResponse?>.Failure(HttpStatusCode.ServiceUnavailable, "Server is not reachable.", ClientErrorType.NetworkFailure);
             }
-            catch (TaskCanceledException ex)
+            catch (TaskCanceledException)
             {
                 return ClientResult<CreateContactResponse?>.Failure(HttpStatusCode.RequestTimeout, "Request timed out.", ClientErrorType.Timeout);
             }
@@ -138,11 +138,7 @@ namespace ContactsApp.ConsoleUI.Api
             try
             {
                 var response = await _httpClient.PutAsJsonAsync($"/api/contacts/{id}", request);
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    var data = await response.Content.ReadFromJsonAsync<UpdateContactResponse>();
-                //    return ClientResult<UpdateContactResponse?>.Success(response.StatusCode, data!);
-                //}
+                 
                 if (response.IsSuccessStatusCode)
                 {
                     return ClientResult<UpdateContactResponse?>.Success(response.StatusCode, null);

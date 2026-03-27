@@ -1,7 +1,6 @@
 using ContactsApp.Core.Contacts.Entities;
 using ContactsApp.Core.Contacts.Interfaces;
-using ContactsApp.Core.Shared;
-using System.Security.Cryptography.X509Certificates;
+using ContactsApp.Core.Shared; 
 
 namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
 {
@@ -26,6 +25,7 @@ namespace ContactsApp.Core.Contacts.UseCases.UpdateContact
                     input.LastName, 
                     input.Phone, 
                     input.Email, 
+                    input.Address,
                     input.CountryId
                 );
                 await _repository.UpdateAsync( contact ); 

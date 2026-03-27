@@ -6,6 +6,8 @@ namespace ContactsApp.Contracts.Contacts.UpdateContact
         string FirstName,
         string LastName,
         string Phone,
-        string? Email
+        string? Email,
+        string? Address,
+        int CountryId
     );
 }

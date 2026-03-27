@@ -5,6 +5,8 @@ namespace ContactsApp.Core.Contacts.ReadModels
         string FirstName,
         string LastName,
         string Phone,
-        string CountryId
+        string? Email,
+        string? Address,
+        string CountryName
     );
 }

@@ -17,12 +17,12 @@ namespace ContactsApp.ConsoleUI.Features.GetContactById
 
         public void DisplayContact(GetContactByIdResponse response)
         {
-            // i wanna display the contact record here 
-
             Console.WriteLine($"Id: {response.Id} "); 
             Console.WriteLine($"Name: {response.Name} "); 
-            Console.WriteLine($"Phone: {response.Phone} "); 
-            Console.WriteLine($"Country: {response.Country} "); 
+            Console.WriteLine($"Phone: {response.Phone} ");
+            Console.WriteLine($"Email: {response.Email} ");
+            Console.WriteLine($"Address: {response.Address} ");
+            Console.WriteLine($"Country: {response.CountryName} ");
         }
     }
 }
