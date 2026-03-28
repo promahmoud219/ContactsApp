@@ -71,8 +71,7 @@ namespace ContactsApp.Core.Contacts.Entities
         
         public void SetCountryId(int countryId)
         {
-
-            if (countryId < 1 || countryId > 5)
+            if (countryId < 1)
                 throw new ArgumentException("Invalid CountryId.");
             CountryId = countryId;
         }

@@ -18,11 +18,11 @@ namespace ContactsApp.ConsoleUI.Features.GetContactById
         public void DisplayContact(GetContactByIdResponse response)
         {
             Console.WriteLine($"Id: {response.Id} "); 
-            Console.WriteLine($"Name: {response.Name} "); 
+            Console.WriteLine($"Full Name: {response.FullName} "); 
             Console.WriteLine($"Phone: {response.Phone} ");
             Console.WriteLine($"Email: {response.Email} ");
             Console.WriteLine($"Address: {response.Address} ");
-            Console.WriteLine($"Country: {response.CountryName} ");
+            Console.WriteLine($"Country: {response.Country} ");
         }
     }
 }

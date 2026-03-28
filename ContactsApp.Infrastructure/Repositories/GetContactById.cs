@@ -14,7 +14,7 @@ namespace ContactsApp.Infrastructure.Repositories
             await connection.OpenAsync();
 
             const string query = @"
-            SELECT c.Id, c.FirstName, c.LastName, c.Phone, c.Email, c.Address, co.Name AS Country
+            SELECT c.Id, c.FirstName, c.LastName, c.Phone, c.Email, c.Address, co.Name AS CountryName
             FROM Contacts c
             JOIN Countries co ON c.CountryId = co.Id
             WHERE c.Id = @id";
@@ -27,13 +27,16 @@ namespace ContactsApp.Infrastructure.Repositories
 
             if (await reader.ReadAsync())
             {
+                int emailOrdinal = reader.GetOrdinal("Email");
+                int addressOrdinal = reader.GetOrdinal("Address");
+
                 return new ContactReadModel(
                     reader.GetInt32(reader.GetOrdinal("Id")),
                     reader.GetString(reader.GetOrdinal("FirstName")),
                     reader.GetString(reader.GetOrdinal("LastName")),
                     reader.GetString(reader.GetOrdinal("Phone")),
-                    reader.GetString(reader.GetOrdinal("Email")),
-                    reader.GetString(reader.GetOrdinal("Address")),
+                    reader.IsDBNull(emailOrdinal) ? null : reader.GetString(emailOrdinal),
+                    reader.IsDBNull(addressOrdinal) ? null : reader.GetString(addressOrdinal),
                     reader.GetString(reader.GetOrdinal("CountryName"))
                 );
             }

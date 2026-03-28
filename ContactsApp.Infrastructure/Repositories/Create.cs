@@ -26,8 +26,13 @@ namespace ContactsApp.Infrastructure.Repositories
             cmd.Parameters.Add("@Address", SqlDbType.NVarChar, 200).Value = (object?)contact.Address ?? DBNull.Value;
             cmd.Parameters.Add("@CountryId", SqlDbType.Int).Value = contact.CountryId;
 
-            var id = (int)await cmd.ExecuteScalarAsync();
-            return id;
+            var scalarResult = await cmd.ExecuteScalarAsync();
+            if (scalarResult is null || scalarResult is DBNull)
+            {
+                throw new InvalidOperationException("Failed to retrieve new contact ID after insert.");
+            }
+
+            return Convert.ToInt32(scalarResult);
         }
     }
 }

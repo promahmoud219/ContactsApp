@@ -1,6 +1,4 @@
-﻿using ContactsApp.Contracts.Contacts.GetContactById;
-
-namespace ContactsApp.ConsoleUI.Features.DeleteContact
+﻿namespace ContactsApp.ConsoleUI.Features.DeleteContact
 {
 
     public class DeleteContactView
@@ -51,15 +49,7 @@ namespace ContactsApp.ConsoleUI.Features.DeleteContact
         public void ShowMessage(string message)
         {
             Console.WriteLine(message);
-        }
-        public void DisplayContact(GetContactByIdResponse contact)
-        {
-            Console.WriteLine("Contact to delete:");
-            Console.WriteLine($"Id: {contact.Id}");
-            Console.WriteLine($"Name: {contact.Name}");
-            Console.WriteLine($"Phone: {contact.Phone}");
-            Console.WriteLine($"Country: {contact.CountryId}");
-        }
+        } 
     }
 }
 
