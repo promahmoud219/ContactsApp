@@ -1,42 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <title>Contacts App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/Features/Contacts/Home/Home.css">
 </head>
 <body>
 
-    <div class="container">
+    <div class="layout">
 
-        <h1>Add Contact</h1>
+        <aside class="sidebar">
+            <nav class="menu">
+                <a data-route="create">Create</a>
+            </nav>
+        </aside>
 
-        <form>
-
-            <label>First Name</label>
-            <input type="text" placeholder="Enter first name">
-
-            <label>Last Name</label>
-            <input type="text" placeholder="Enter last name">
-
-            <label>Phone</label>
-            <input type="text" placeholder="Enter phone">
-
-            <label>Email</label>
-            <input type="email" placeholder="Enter email">
-
-            <label>Country</label>
-            <select>
-                <option>EG</option>
-                <option>US</option>
-                <option>UK</option>
-            </select>
-
-            <button type="submit">Add Contact</button>
-
-        </form>
+        <div class="main">
+            <main id="content"></main>
+        </div>
 
     </div>
+
+    <script src="/Features/Contacts/Home/Home.js"></script>
 
 </body>
 </html>
