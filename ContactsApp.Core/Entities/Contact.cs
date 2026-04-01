@@ -3,9 +3,9 @@ namespace ContactsApp.Core.Contacts.Entities
     public class Contact
     {
         public int Id { get; private set; }
-        public string FirstName { get; private set; } 
-        public string LastName { get; private set; }
-        public string Phone { get; private set; }
+        public string FirstName { get; private set; } = default!;
+        public string LastName { get; private set; } = default!;
+        public string Phone { get; private set; } = default!;
         public string? Email { get; private set; }
         public string? Address { get; private set; }
         public int CountryId { get; private set; }
@@ -41,13 +41,16 @@ namespace ContactsApp.Core.Contacts.Entities
 
         public void SetLastName(string lastName)
         {
-            if (string.IsNullOrWhiteSpace(lastName)
-                || lastName.Length < 3
-                || lastName.Length > 30
-                || !lastName.All(char.IsLetter))
-                throw new ArgumentException("Last name must contain only letters and be between 3 and 30 characters.");
+            var trimmed = lastName?.Trim();
+            bool invalid = string.IsNullOrWhiteSpace(trimmed)
+                           || trimmed.Length < 3
+                           || trimmed.Length > 30
+                           || trimmed.Any(c => !(char.IsLetter(c) || c == ' ' || c == '-' || c == '\''));
 
-            LastName = lastName.Trim();
+            if (invalid)
+                throw new ArgumentException("Last name must be 3-30 chars and contain only letters, spaces, - or ' .");
+
+            LastName = trimmed!;
         }
 
         public void SetPhone(string phone)

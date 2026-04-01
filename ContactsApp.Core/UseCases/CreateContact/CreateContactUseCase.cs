@@ -1,30 +1,40 @@
 using ContactsApp.Core.Contacts.Entities;
-using ContactsApp.Core.Contacts.Interfaces; 
+using ContactsApp.Core.Contacts.Interfaces;
 using ContactsApp.Core.Shared;
-using System.Security.Cryptography.X509Certificates;
+using ContactsApp.Core.Services.Email;
+using Serilog;
 
 namespace ContactsApp.Core.Contacts.UseCases.CreateContact
 {
     public class CreateContactUseCase : ICreateContactUseCase
     {
         private readonly IContactRepository _repository;
+        private readonly IEmailSender _emailSender;
+        private readonly Serilog.ILogger _logger;
 
-        public CreateContactUseCase(IContactRepository repository)
+        public CreateContactUseCase(
+            IContactRepository repository,
+            IEmailSender emailSender,
+            Serilog.ILogger logger)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _emailSender = emailSender ?? throw new ArgumentNullException(nameof(emailSender));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+
         public async Task<OperationResult<CreateContactOutput>> ExecuteAsync(CreateContactInput input)
         {
             if (input is null)
                 throw new ArgumentNullException(nameof(input));
+
             try
             {
                 var contact = new Contact(
-                    input.FirstName, 
-                    input.LastName, 
-                    input.Phone, 
-                    input.Email, 
-                    input.Address, 
+                    input.FirstName,
+                    input.LastName,
+                    input.Phone,
+                    input.Email,
+                    input.Address,
                     input.CountryId
                 );
 
@@ -38,29 +48,48 @@ namespace ContactsApp.Core.Contacts.UseCases.CreateContact
                     contact.Address,
                     contact.CountryId
                 );
-                var result = new OperationResult<CreateContactOutput>
-                (
+
+                if (!string.IsNullOrWhiteSpace(contact.Email))
+                {
+                    try
+                    {
+                        await _emailSender.SendAsync(
+                            contact.Email,
+                            "Account created",
+                            $"Hello {contact.FirstName}, your account/contact was created successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.Error(ex,
+                            "Failed to send created-contact email for ContactId={ContactId}",
+                            createdId);
+                    }
+                }
+                else
+                {
+                    _logger.Information(
+                        "Contact created without email, skipping notification for ContactId={ContactId}",
+                        createdId);
+                }
+
+                return new OperationResult<CreateContactOutput>(
                     OperationStatus.Success,
                     output,
-                    null
-                );
-                return result;
+                    null);
             }
             catch (ArgumentException ex)
             {
                 return new OperationResult<CreateContactOutput>(
                     OperationStatus.ValidationError,
                     null,
-                    ex.Message
-                );
+                    ex.Message);
             }
             catch (Exception ex)
             {
                 return new OperationResult<CreateContactOutput>(
                     OperationStatus.Failure,
                     null,
-                    ex.Message
-                );
+                    ex.Message);
             }
         }
     }

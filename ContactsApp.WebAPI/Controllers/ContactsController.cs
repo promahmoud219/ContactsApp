@@ -39,12 +39,13 @@ namespace ContactsApp.WebAPI.Controllers
         {
             var input = Mappings.CreateContactMapping.ToInput(request);
             var result = await _createContactUseCase.ExecuteAsync(input);
-            var response = Mappings.CreateContactMapping.ToResponse(result.Output!);
 
             return result.Status switch
             {
-                OperationStatus.Success =>
-                    Created($"/api/contacts/{response.Id}", response),
+                OperationStatus.Success when result.Output is not null =>
+                    Created(
+                        $"/api/contacts/{result.Output.Id}",
+                        Mappings.CreateContactMapping.ToResponse(result.Output)),
                 OperationStatus.ValidationError =>
                     BadRequest(result.ErrorMessage),
                 OperationStatus.NotFound =>

@@ -8,15 +8,14 @@ namespace ContactsApp.WebAPI.Mappings
     {
         public static GetContactByIdResponse ToResponse(GetContactByIdOutput output)
         {
-            if (output is null)
-                throw new ArgumentNullException(nameof(output));
+            ArgumentNullException.ThrowIfNull(output);
 
             return new GetContactByIdResponse(
                 output.Id,
                 output.FullName,
                 output.Phone,
-                output?.Email,
-                output?.Address,
+                output.Email,
+                output.Address,
                 output.CountryName
             );
         }

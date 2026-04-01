@@ -1,9 +1,13 @@
 using ContactsApp.Core.Contacts.Interfaces;
 using ContactsApp.Core.Contacts.UseCases.CreateContact;
-using ContactsApp.Core.Contacts.UseCases.UpdateContact;
 using ContactsApp.Core.Contacts.UseCases.DeleteContact;
 using ContactsApp.Core.Contacts.UseCases.GetContactById;
+using ContactsApp.Core.Contacts.UseCases.UpdateContact;
+using ContactsApp.Core.Services.Email;
+using ContactsApp.Infrastructure.Email;
 using ContactsApp.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Builder.Extensions;
+using Serilog;
 
 namespace ContactsApp.WebAPI
 {
@@ -12,10 +16,23 @@ namespace ContactsApp.WebAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
+            // logging
+            Log.Logger = new LoggerConfiguration()
+                            .Enrich.FromLogContext()
+                            .WriteTo.Console()
+                            .WriteTo.Seq("http://localhost:5341")
+                            .CreateLogger();
 
+            builder.Host.UseSerilog();
+         
             builder.Services.AddControllers();
 
+            builder.Services.Configure<SmtpOptions>(
+                builder.Configuration.GetSection("Smtp"));
+
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
+
             builder.Services.AddScoped<ICreateContactUseCase, CreateContactUseCase>();
             builder.Services.AddScoped<IUpdateContactUseCase, UpdateContactUseCase>();
             builder.Services.AddScoped<IDeleteContactUseCase, DeleteContactUseCase>();
@@ -24,9 +41,20 @@ namespace ContactsApp.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Provide Serilog logger to DI consumers (use case constructors, etc.)
+            builder.Services.AddSingleton<Serilog.ILogger>(_ => Log.Logger);
+
+            builder.Services.AddOptions<SmtpOptions>()
+            .Bind(builder.Configuration.GetSection("Smtp"))
+            .Validate(o => !string.IsNullOrWhiteSpace(o.Host), "SMTP Host is required.")
+            .Validate(o => !string.IsNullOrWhiteSpace(o.From), "SMTP From is required.")
+            .Validate(o => o.Port > 0, "SMTP Port must be greater than 0.")
+            .ValidateOnStart();
+            
+            builder.Services.AddScoped<IEmailSender, MailKitEmailSender>();
+             
             var app = builder.Build();
 
-            // Swagger (Development only)
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -39,4 +67,4 @@ namespace ContactsApp.WebAPI
             app.Run();
         }
     }
-}   
+}

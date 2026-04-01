@@ -488,3 +488,8 @@ $RECYCLE.BIN/
 .vs/
 .vs/ContactsApp/
 .vs/ContactsApp/FileContentIndex/
+
+
+# Custom settings files
+appsettings.json
+appsettings.Development.json
