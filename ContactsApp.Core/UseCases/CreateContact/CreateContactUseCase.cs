@@ -1,4 +1,4 @@
-using ContactsApp.Core.Contacts.Entities;
+﻿using ContactsApp.Core.Contacts.Entities;
 using ContactsApp.Core.Contacts.Interfaces;
 using ContactsApp.Core.Shared;
 using ContactsApp.Core.Services.Email;
@@ -56,7 +56,8 @@ namespace ContactsApp.Core.Contacts.UseCases.CreateContact
                         await _emailSender.SendAsync(
                             contact.Email,
                             "Account created",
-                            $"Hello {contact.FirstName}, your account/contact was created successfully.");
+                            $"{contact.FirstName}ازيك يا \n" +
+                            $"دي الفيتشر اللي كلمتك عنها عملتها الحمد لله امبارح");
                     }
                     catch (Exception ex)
                     {
