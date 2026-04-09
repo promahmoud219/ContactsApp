@@ -101,6 +101,9 @@ body {
   color: var(--text); 
 }
 
+.nav-item.active svg{
+  fill: white;
+}
 .nav-item.active {
   background: var(--primary);
   color: white;
