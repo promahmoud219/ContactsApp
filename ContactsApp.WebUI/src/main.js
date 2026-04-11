@@ -1,3 +1,18 @@
+import "./styles/base/reset.css";
+import "./styles/base/variables.css";
+
+import "./styles/layout/app-shell.css";
+import "./styles/layout/sidebar.css";
+import "./styles/layout/topbar.css";
+import "./styles/layout/app-main.css";
+import "./styles/layout/page.css";
+
+
+import "./styles/features/contacts/contacts-table.css";
+import "./styles/features/modal/modal.css";
+
+
+
 const modal = document.querySelector(".modal");
 
 let btn_add_contact = document.getElementById("btn-add-contact");

@@ -1,0 +1,22 @@
+html {
+scroll-behavior: smooth; 
+  scrollbar-gutter: stable;
+}
+
+html, body {
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #2c2c2c;
+  color: var(--text);
+
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

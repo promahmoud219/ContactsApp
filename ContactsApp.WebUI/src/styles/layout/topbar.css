@@ -1,0 +1,63 @@
+.topbar { 
+  height: var(--topbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface); 
+  width: 100%; 
+}
+
+.topbar .search {
+  flex: 1;
+  min-width: 250px; 
+  display: flex; 
+} 
+
+.search input { 
+  height: 40px;
+  max-width: 700px;
+  width: 100%;  
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  
+  padding: 0 14px;
+
+  background: var(--bg);
+  color: var(--text);
+  
+  outline: none;
+  transition: 0.2s;
+}
+.topbar input{
+  outline: none;
+}
+
+.topbar button{
+  border: none;
+}
+.topbar #btn-add-contact:hover {
+  background: var(--primary-hover);
+}
+.topbar #btn-add-contact {
+  height: 40px;
+  padding: 0 16px;
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: var(--primary);
+  color: white;
+
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.search input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(9,108,254,0.1);
+}
