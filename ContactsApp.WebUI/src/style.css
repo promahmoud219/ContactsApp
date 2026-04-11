@@ -17,10 +17,12 @@
   --sidebar-width: 300px;
   --topbar-height: 72px;
 }
+
 html {
-  /* scroll-behavior: smooth; */
+scroll-behavior: smooth; 
   scrollbar-gutter: stable;
 }
+
 html, body {
   height: 1000px;
   height: 1100vh;
@@ -29,8 +31,6 @@ html, body {
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* background: var(--bg); */
-  /* this bg color is the same as scroll bar, so when i open any modal, it would look like nothing happened */
   background: #2c2c2c;
   color: var(--text);
 
@@ -192,8 +192,7 @@ body {
 
 .topbar .search {
   flex: 1;
-  min-width: 250px;
-  /* max-width: 650px; */
+  min-width: 250px; 
   display: flex; 
 } 
 
@@ -371,11 +370,10 @@ body {
 }
 .modal__overlay {
   position: absolute;
-  inset: 0;
-  /* background-color: rgba(255, 255, 255, 0.4); لون أبيض شفاف جداً */
+  inset: 0; 
   background-color: rgba(28, 54, 108, 0.4);   
-  backdrop-filter: blur(8px); /* دي الحركة اللي بتعمل الغبش أو الـ Blur */
-  -webkit-backdrop-filter: blur(8px); /* لدعم متصفح Safari */
+  backdrop-filter: blur(8px);  
+  -webkit-backdrop-filter: blur(8px);  
 }
 
 .modal__content {
@@ -461,5 +459,4 @@ body {
   color: var(--text);
   outline: none;
 }
-
 
