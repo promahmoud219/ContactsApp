@@ -13,41 +13,24 @@ import "./styles/features/modal/modal.css";
 
 
 
-const modal = document.querySelector(".modal");
+import "./styles/base/reset.css";
+import "./styles/base/variables.css";
 
-let btn_add_contact = document.getElementById("btn-add-contact");
-let btn_cancel = document.getElementById("btn-cancel");
+import "./styles/layout/app-shell.css";
+import "./styles/layout/sidebar.css";
+import "./styles/layout/topbar.css";
+import "./styles/layout/app-main.css";
+import "./styles/layout/page.css";
 
-btn_add_contact.addEventListener("click", openModal);
-btn_cancel.addEventListener("click", closeModal);
-document.querySelector(".modal__overlay").addEventListener("click", closeModal);
- 
- 
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    closeModal();
-  }
-});
+import "./styles/features/contacts/contacts-table.css";
+import "./styles/features/add-contact/add-contact-form.css";
+import "./styles/features/modal/modal.css";
 
-let isModalOpen = false;
 
-function openModal() {
-  if (isModalOpen) return;
+import { initModal } from "./features/modal/modal.js";
+import { initAddContact } from "./features/add-contact/addContact.controller.js";
 
-  modal.removeAttribute("hidden");
-  document.body.style.overflow = "hidden";
+initModal(".modal");
+initAddContact();
 
-  modal.querySelector("input")?.focus();
-
-  isModalOpen = true;
-}
-
-function closeModal() {
-  if (!isModalOpen) return;
-
-  modal.setAttribute("hidden", true);
-  document.body.style.overflow = "";
-
-  isModalOpen = false;
-}
