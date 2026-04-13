@@ -37,6 +37,15 @@ namespace ContactsApp.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateContactAsync([FromBody] CreateContactRequest request)
         {
+            // i'll delete these lines, it's only for debuggining
+            Console.WriteLine("First Name: " + request.FirstName);
+            Console.WriteLine("Last Name: " + request.LastName);
+            Console.WriteLine("Phone: " + request.Phone);
+            Console.WriteLine("Email: " + request.Email);
+            Console.WriteLine("Address: " + request.Address);
+            Console.WriteLine("CountryId: " + request.CountryId);
+            Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(request));
+
             var input = Mappings.CreateContactMapping.ToInput(request);
             var result = await _createContactUseCase.ExecuteAsync(input);
 

@@ -1,5 +1,7 @@
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export async function post(url, data) {
-  const response = await fetch(url, {
+  console.log("BASE_URL:", import.meta.env.VITE_API_BASE_URL);
+  const response = await fetch(`${BASE_URL}${url}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -8,7 +10,9 @@ export async function post(url, data) {
   });
 
   if (!response.ok) {
-    throw new Error("Request failed");
+    const text = await response.text(); 
+    console.error("SERVER ERROR:", text);
+    throw new Error(text || "Request failed");
   }
 
   return response.json();

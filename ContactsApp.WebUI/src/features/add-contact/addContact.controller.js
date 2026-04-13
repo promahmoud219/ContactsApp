@@ -25,20 +25,24 @@ async function handleSubmit(e) {
   const contact = {
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
-    email: formData.get("email"),
     phone: formData.get("phone"),
+    email: formData.get("email"),
     address: formData.get("address"),
-    governorate: formData.get("country")
+    countryId: Number(formData.get("country"))
   };
 
   try {
-    await createContact(contact);
-
+    const result = await createContact(contact);
+    console.log("SUCCESS:", result);
+    
+    alert("Contact created successfully ✅");
     closeModal();
+    e.target.reset();
 
     // update state + re-render -> later when we have state management
 
   } catch (err) {
-    console.error(err);
+    console.error("ERROR:", err);
+    alert("Something went wrong ❌");
   }
 }

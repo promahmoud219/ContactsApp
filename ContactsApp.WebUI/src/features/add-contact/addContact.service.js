@@ -1,3 +1,5 @@
+import { post } from "../../shared/api/httpClient";
+
 export async function createContact(contact) {
-  return post("/contacts", contact);
+  return post("/api/contacts", contact);
 }
