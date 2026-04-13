@@ -23,10 +23,10 @@ namespace ContactsApp.ConsoleUI.Features.CreateContact
             Console.Write("Enter Address (optional): ");
             var address = Console.ReadLine();
 
-            Console.Write("Enter CountryId (numeric): ");
-            int.TryParse(Console.ReadLine(), out var countryId);
+            Console.Write("Enter GovernorateId (numeric): ");
+            int.TryParse(Console.ReadLine(), out var governorateId);
 
-            return new CreateContactRequest(firstName, lastName, phone, email, address, countryId);
+            return new CreateContactRequest(firstName, lastName, phone, email, address, governorateId);
         }
 
         public void ShowContactRecord(CreateContactResponse response)
@@ -38,7 +38,7 @@ namespace ContactsApp.ConsoleUI.Features.CreateContact
             Console.WriteLine($"Phone: {response.Phone}");
             Console.WriteLine($"Email: {response.Email}");
             Console.WriteLine($"Address: {response.Address}");
-            Console.WriteLine($"CountryId: {response.CountryId}");
+            Console.WriteLine($"GovernorateId: {response.GovernorateId}");
 
             Console.ResetColor();
         } 

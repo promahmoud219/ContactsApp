@@ -8,6 +8,6 @@ namespace ContactsApp.Contracts.Contacts.UpdateContact
         string Phone,
         string? Email,
         string? Address,
-        int CountryId
+        int GovernorateId
     );
 }

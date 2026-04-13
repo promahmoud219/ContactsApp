@@ -14,8 +14,8 @@ namespace ContactsApp.Infrastructure.Repositories
             await connection.OpenAsync();
 
             const string query = @" 
-            INSERT INTO Contacts (FirstName, LastName, Email, Phone, Address, CountryId) 
-            VALUES (@FirstName, @LastName, @Email, @Phone, @Address, @CountryId);
+            INSERT INTO Contacts (FirstName, LastName, Email, Phone, Address, GovernorateId) 
+            VALUES (@FirstName, @LastName, @Email, @Phone, @Address, @GovernorateId);
             SELECT CAST(SCOPE_IDENTITY() as int);";
 
             using var cmd = new SqlCommand(query, connection);
@@ -24,7 +24,7 @@ namespace ContactsApp.Infrastructure.Repositories
             cmd.Parameters.Add("@Phone", SqlDbType.NVarChar, 20).Value = contact.Phone;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = (object?)contact.Email ?? DBNull.Value;
             cmd.Parameters.Add("@Address", SqlDbType.NVarChar, 200).Value = (object?)contact.Address ?? DBNull.Value;
-            cmd.Parameters.Add("@CountryId", SqlDbType.Int).Value = contact.CountryId;
+            cmd.Parameters.Add("@GovernorateId", SqlDbType.Int).Value = contact.GovernorateId;
 
             var scalarResult = await cmd.ExecuteScalarAsync();
             if (scalarResult is null || scalarResult is DBNull)

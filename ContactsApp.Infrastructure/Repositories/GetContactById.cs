@@ -16,7 +16,7 @@ namespace ContactsApp.Infrastructure.Repositories
             const string query = @"
             SELECT c.Id, c.FirstName, c.LastName, c.Phone, c.Email, c.Address, co.Name AS CountryName
             FROM Contacts c
-            JOIN Countries co ON c.CountryId = co.Id
+            JOIN Countries co ON c.GovernorateId = co.Id
             WHERE c.Id = @id";
 
             using var cmd = new SqlCommand(query, connection);

@@ -28,13 +28,13 @@ export function createAddContactView() {
         </div>
         <div class="form-group">
           <label>Governorate</label>
-          <select name="governorate" required>                                                                                       
+          <select name="governorateId" required>
             <option value="" disabled selected>Select governorate</option>
-            <option value=1>Cairo</option> 
-            <option value=2>Giza</option> 
-            <option value=3>Alexandria</option> 
-            <option value=4>Kafr El Sheikh</option>
-            <option value=5>Sohag</option> 
+            <option value="1">Cairo</option>
+            <option value="2">Giza</option>
+            <option value="3">Alexandria</option>
+            <option value="4">Kafr El Sheikh</option>
+            <option value="5">Sohag</option>
           </select>
         </div>
         <div class="modal__actions">

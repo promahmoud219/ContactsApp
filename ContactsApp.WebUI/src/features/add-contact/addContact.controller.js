@@ -21,16 +21,21 @@ async function handleSubmit(e) {
   e.preventDefault();
 
   const formData = new FormData(e.target);
-
+  const governorateId = Number(formData.get("governorateId"));
+  if (!Number.isInteger(governorateId) || governorateId <= 0) {
+    alert("Please select a valid governorate.");
+    return;
+  }
   const contact = {
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
     phone: formData.get("phone"),
     email: formData.get("email"),
     address: formData.get("address"),
-    countryId: Number(formData.get("country"))
+    governorateId
   };
 
+  
   try {
     const result = await createContact(contact);
     console.log("SUCCESS:", result);

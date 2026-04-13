@@ -35,7 +35,7 @@ namespace ContactsApp.Core.Contacts.UseCases.CreateContact
                     input.Phone,
                     input.Email,
                     input.Address,
-                    input.CountryId
+                    input.GovernorateId
                 );
 
                 var createdId = await _repository.CreateAsync(contact);
@@ -46,7 +46,7 @@ namespace ContactsApp.Core.Contacts.UseCases.CreateContact
                     contact.Phone,
                     contact.Email,
                     contact.Address,
-                    contact.CountryId
+                    contact.GovernorateId
                 );
 
                 if (!string.IsNullOrWhiteSpace(contact.Email))

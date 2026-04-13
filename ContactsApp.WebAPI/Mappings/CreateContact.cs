@@ -17,7 +17,7 @@ namespace ContactsApp.WebAPI.Mappings
                 request.Phone,
                 request.Email,
                 request.Address,
-                request.CountryId
+                request.GovernorateId
             );
         }
         public static CreateContactResponse ToResponse(CreateContactOutput output)
@@ -31,7 +31,7 @@ namespace ContactsApp.WebAPI.Mappings
                 output.Phone,
                 output.Email,
                 output.Address,
-                output.CountryId
+                output.GovernorateId
             );
         }
     }

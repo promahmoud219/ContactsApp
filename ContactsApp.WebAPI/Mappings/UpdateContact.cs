@@ -18,7 +18,7 @@ namespace ContactsApp.WebAPI.Mappings
                 request.Phone,
                 request.Email,
                 request.Address,
-                request.CountryId
+                request.GovernorateId
             );
         }
  

@@ -6,6 +6,6 @@ namespace ContactsApp.Core.Contacts.UseCases.CreateContact
         string Phone,
         string? Email,
         string? Address,
-        int CountryId
+        int GovernorateId
     );
 }                   

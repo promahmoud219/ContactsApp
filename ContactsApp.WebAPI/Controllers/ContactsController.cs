@@ -43,7 +43,7 @@ namespace ContactsApp.WebAPI.Controllers
             Console.WriteLine("Phone: " + request.Phone);
             Console.WriteLine("Email: " + request.Email);
             Console.WriteLine("Address: " + request.Address);
-            Console.WriteLine("CountryId: " + request.CountryId);
+            Console.WriteLine("GovernorateId: " + request.GovernorateId);
             Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(request));
 
             var input = Mappings.CreateContactMapping.ToInput(request);

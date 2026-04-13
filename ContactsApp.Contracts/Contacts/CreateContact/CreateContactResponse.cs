@@ -7,6 +7,6 @@ namespace ContactsApp.Contracts.Contacts.CreateContact
         string Phone,
         string? Email,
         string? Address,
-        int CountryId
+        int GovernorateId
     );
 }

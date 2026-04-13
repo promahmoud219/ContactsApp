@@ -8,19 +8,19 @@ namespace ContactsApp.Core.Contacts.Entities
         public string Phone { get; private set; } = default!;
         public string? Email { get; private set; }
         public string? Address { get; private set; }
-        public int CountryId { get; private set; }
+        public int GovernorateId { get; private set; }
 
-        public Contact(string firstName, string lastName, string phone, string? email = null, string? address = null, int countryId = 0)
+        public Contact(string firstName, string lastName, string phone, string? email = null, string? address = null, int GovernorateId = 0)
         {
             SetFirstName(firstName);
             SetLastName(lastName);
             SetPhone(phone);
             SetEmail(email);
             SetAddress(address);
-            SetCountryId(countryId);
+            SetGovernorateId(GovernorateId);
         }
         // for update feature, we need to set the Id as well
-        public Contact(int Id, string firstName, string lastName, string phone, string? email = null, string? address = null, int countryId = 0)
+        public Contact(int Id, string firstName, string lastName, string phone, string? email = null, string? address = null, int GovernorateId = 0)
         {
             this.Id = Id;
             SetFirstName(firstName);
@@ -28,7 +28,7 @@ namespace ContactsApp.Core.Contacts.Entities
             SetPhone(phone);
             SetEmail(email);
             SetAddress(address);
-            SetCountryId(countryId);
+            SetGovernorateId(GovernorateId);
         }
          
 
@@ -72,11 +72,11 @@ namespace ContactsApp.Core.Contacts.Entities
             Address = string.IsNullOrWhiteSpace(address) ? null : address.Trim();
         }
         
-        public void SetCountryId(int countryId)
+        public void SetGovernorateId(int GovernorateId)
         {
-            if (countryId < 1)
-                throw new ArgumentException("Invalid CountryId.");
-            CountryId = countryId;
+            if (GovernorateId < 1)
+                throw new ArgumentException("Invalid GovernorateId.");
+            GovernorateId = GovernorateId;
         }
 
 

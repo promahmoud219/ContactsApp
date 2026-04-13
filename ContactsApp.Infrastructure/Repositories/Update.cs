@@ -22,7 +22,7 @@ namespace ContactsApp.Infrastructure.Repositories
                 LastName = @LastName, 
                 Phone = @Phone, 
                 Email = @Email,
-                CountryId = @CountryId
+                GovernorateId = @GovernorateId
             WHERE Id = @id;";
 
             using var cmd = new SqlCommand(query, connection);
@@ -32,7 +32,7 @@ namespace ContactsApp.Infrastructure.Repositories
             cmd.Parameters.Add("@LastName", SqlDbType.NVarChar, 50).Value = contact.LastName;
             cmd.Parameters.Add("@Phone", SqlDbType.NVarChar, 20).Value = contact.Phone;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = (object?)contact.Email ?? DBNull.Value;
-            cmd.Parameters.Add("@CountryId", SqlDbType.Int).Value = contact.CountryId;
+            cmd.Parameters.Add("@GovernorateId", SqlDbType.Int).Value = contact.GovernorateId;
 
             // i will continue row version later
             // ??????? ?? ?? ????? ?????? ?????
