@@ -72,11 +72,11 @@ namespace ContactsApp.Core.Contacts.Entities
             Address = string.IsNullOrWhiteSpace(address) ? null : address.Trim();
         }
         
-        public void SetGovernorateId(int GovernorateId)
+        public void SetGovernorateId(int governorateId)
         {
-            if (GovernorateId < 1)
-                throw new ArgumentException("Invalid GovernorateId.");
-            GovernorateId = GovernorateId;
+            if (governorateId < 1)
+                throw new ArgumentException("Invalid governorateId.");
+            GovernorateId = governorateId;
         }
 
 
