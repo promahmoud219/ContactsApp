@@ -6,6 +6,6 @@ namespace ContactsApp.Contracts.Contacts.GetContactById
         string Phone, 
         string? Email,
         string? Address,
-        string Country
+        string GovernorateName
     );
 }

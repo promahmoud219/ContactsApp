@@ -22,7 +22,7 @@ namespace ContactsApp.ConsoleUI.Features.GetContactById
             Console.WriteLine($"Phone: {response.Phone} ");
             Console.WriteLine($"Email: {response.Email} ");
             Console.WriteLine($"Address: {response.Address} ");
-            Console.WriteLine($"Country: {response.Country} ");
+            Console.WriteLine($"Governorate: {response.GovernorateName} ");
         }
     }
 }

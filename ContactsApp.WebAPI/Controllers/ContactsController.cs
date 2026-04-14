@@ -103,6 +103,26 @@ namespace ContactsApp.WebAPI.Controllers
             };
         }
 
+        [HttpGet()]
+        public async Task<IActionResult> GetAllContactsAsync()
+        {
+            var result = await _getAllContactsUseCase.ExecuteAsync();
+
+            return result.Status switch
+            {
+                OperationStatus.Success =>
+                    Ok(Mappings.GetAllContactsMapping.ToResponse(result.Output!)),
+                OperationStatus.NotFound =>
+                    NotFound(result.ErrorMessage),
+                OperationStatus.ValidationError =>
+                    BadRequest(result.ErrorMessage),
+                OperationStatus.Failure =>
+                    StatusCode(500, result.ErrorMessage),
+                _ => StatusCode(500, "An unexpected error occurred.")
+            };
+        }
+
+              
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContactAsync(int id, [FromBody] UpdateContactRequest request)

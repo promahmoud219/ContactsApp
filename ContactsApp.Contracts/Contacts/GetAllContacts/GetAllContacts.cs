@@ -1,9 +1,9 @@
-namespace ContactsApp.Core.Contacts.UseCases.GetContactById
+namespace ContactsApp.Contracts.Contacts.GetAllContacts
 {
-    public record GetContactByIdOutput(
+    public record GetAllContactsResponse(
         int Id,
         string FullName,
-        string Phone,
+        string Phone, 
         string? Email,
         string? Address,
         string GovernorateName

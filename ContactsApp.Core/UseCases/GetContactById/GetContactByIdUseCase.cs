@@ -35,7 +35,7 @@ namespace ContactsApp.Core.Contacts.UseCases.GetContactById
                 c.Phone,
                 c.Email,
                 c.Address,
-                c.CountryName
+                c.GovernorateName
             );
         }
     }

@@ -7,6 +7,16 @@ namespace ContactsApp.Core.Contacts.ReadModels
         string Phone,
         string? Email,
         string? Address,
-        string CountryName
+        string GovernorateName
     );
+
+    public record ContactDetails(
+      int Id,
+      string FullName,
+      string Phone,
+      string? Email,
+      string? Address,
+      string GovernorateName
+    );
+
 }

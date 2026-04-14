@@ -16,8 +16,8 @@ namespace ContactsApp.WebAPI.Mappings
                 output.Phone,
                 output.Email,
                 output.Address,
-                output.CountryName
+                output.GovernorateName
             );
         }
     }
-}                       
+}
