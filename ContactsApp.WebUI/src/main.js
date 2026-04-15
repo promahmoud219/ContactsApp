@@ -30,6 +30,9 @@ import "./styles/features/modal/modal.css";
 
 import { initModal } from "./features/modal/modal.js";
 import { initAddContact } from "./features/add-contact/addContact.controller.js";
+import { initGetAllContacts } from "./features/get-all-contacts/getAllContacts.controller.js";
+
+initGetAllContacts();
 
 initModal(".modal");
 initAddContact();

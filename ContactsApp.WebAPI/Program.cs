@@ -3,6 +3,7 @@ using ContactsApp.Core.Contacts.UseCases.CreateContact;
 using ContactsApp.Core.Contacts.UseCases.DeleteContact;
 using ContactsApp.Core.Contacts.UseCases.GetContactById;
 using ContactsApp.Core.Contacts.UseCases.UpdateContact;
+using ContactsApp.Core.Contacts.UseCases.GetAllContacts;
 using ContactsApp.Core.Services.Email;
 using ContactsApp.Infrastructure.Email;
 using ContactsApp.Infrastructure.Repositories;
@@ -37,6 +38,7 @@ namespace ContactsApp.WebAPI
             builder.Services.AddScoped<IUpdateContactUseCase, UpdateContactUseCase>();
             builder.Services.AddScoped<IDeleteContactUseCase, DeleteContactUseCase>();
             builder.Services.AddScoped<IGetContactByIdUseCase, GetContactByIdUseCase>();
+            builder.Services.AddScoped<IGetAllContactsUseCase, GetAllContactsUseCase>();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

@@ -2,30 +2,31 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  overflow: hidden;
   box-shadow: var(--shadow-sm);
+  padding: 0;
   width: 100%;
+  overflow: hidden;
 }
-
-.contacts-table thead{
-  width: 100%;
-  background: var(--bg);
-
-}
-
-.contacts-table thead tr{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: space-around;
-}
-.contacts-table table {
+.contacts-table table{
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
+.contacts-table thead{
+  background: var(--bg);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
 
+}
+.contacts-table thead .select-all input, .contacts-table tbody .select-row input{ 
+  width: 15px;
+  height: 15px;
+  text-align: center;
+} 
+ 
 .contacts-table th,
-.contacts-table td {
+.contacts-table td { 
   padding: 16px 20px;
   text-align: left;
   border-bottom: 1px solid var(--border);
@@ -43,16 +44,30 @@
   overflow: hidden;
 }
 
+.contacts-table tbody td .avatar--initials {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #1f6feb, #4ea1ff);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .contacts-table tbody td .avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  
 }
+
 .contacts-table tbody tr {
-  transition: 0.2s;
+  transition: 0.2s ease;
+  cursor: pointer; 
 }
-
-
+.contacts-table tbody tr:hover > td,
+.contacts-table tbody tr:hover > th {
+  background: var(--bg-hover);
+}
 .contact-info .name-and-email .name{
   font-size: 14px;
   font-weight: 600;
@@ -62,3 +77,12 @@
   color: var(--text-muted);  
 }
 
+.contacts-table th:first-child,
+.contacts-table td:first-child {
+  width: 5%;
+  
+}
+
+.contacts-table tr:hover td:first-child {
+  border-top-left-radius: 0px; 
+}

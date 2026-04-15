@@ -34,8 +34,8 @@ namespace ContactsApp.Core.Contacts.Entities
 
         public void SetFirstName(string firstName)
         {
-            if (string.IsNullOrWhiteSpace(firstName) || firstName.Length < 3 || firstName.Length > 30)
-                throw new ArgumentException("First name must be between 3 and 30 characters.");
+            if (string.IsNullOrWhiteSpace(firstName) || firstName.Length < 3 || firstName.Length > 20)
+                throw new ArgumentException("First name must be between 3 and 20 characters.");
             FirstName = firstName.Trim();
         }
 
@@ -44,11 +44,11 @@ namespace ContactsApp.Core.Contacts.Entities
             var trimmed = lastName?.Trim();
             bool invalid = string.IsNullOrWhiteSpace(trimmed)
                            || trimmed.Length < 3
-                           || trimmed.Length > 30
+                           || trimmed.Length > 20
                            || trimmed.Any(c => !(char.IsLetter(c) || c == ' ' || c == '-' || c == '\''));
 
             if (invalid)
-                throw new ArgumentException("Last name must be 3-30 chars and contain only letters, spaces, - or ' .");
+                throw new ArgumentException("Last name must be 3-20 chars and contain only letters, spaces, - or ' .");
 
             LastName = trimmed!;
         }

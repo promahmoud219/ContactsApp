@@ -3,6 +3,7 @@ using ContactsApp.Core.Contacts.UseCases.CreateContact;
 using ContactsApp.Core.Contacts.UseCases.DeleteContact;
 using ContactsApp.Core.Contacts.UseCases.UpdateContact;
 using ContactsApp.Core.Contacts.UseCases.GetContactById;
+using ContactsApp.Core.Contacts.UseCases.GetAllContacts;
 using ContactsApp.Contracts.Contacts.CreateContact;
 using ContactsApp.Contracts.Contacts.UpdateContact;
 using ContactsApp.Core.Shared;
@@ -21,17 +22,20 @@ namespace ContactsApp.WebAPI.Controllers
         private readonly IDeleteContactUseCase _deleteContactUseCase;
         private readonly IGetContactByIdUseCase _getContactByIdUseCase;
         private readonly IUpdateContactUseCase _updateContactUseCase;
+        private readonly IGetAllContactsUseCase _getAllContactsUseCase;
         public ContactsController(
             ICreateContactUseCase createContactUseCase,
             IDeleteContactUseCase deleteContactUseCase,
             IGetContactByIdUseCase getContactByIdUseCase,
-            IUpdateContactUseCase updateContactUseCase
+            IUpdateContactUseCase updateContactUseCase,
+            IGetAllContactsUseCase getAllContactsUseCase
         )
         {
             _createContactUseCase = createContactUseCase;
             _deleteContactUseCase = deleteContactUseCase;
             _getContactByIdUseCase = getContactByIdUseCase;
             _updateContactUseCase = updateContactUseCase;
+            _getAllContactsUseCase = getAllContactsUseCase;
         }
 
         [HttpPost]
@@ -106,7 +110,7 @@ namespace ContactsApp.WebAPI.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetAllContactsAsync()
         {
-            var result = await _getAllContactsUseCase.ExecuteAsync();
+        /*line109*/    var result = await _getAllContactsUseCase.ExecuteAsync();
 
             return result.Status switch
             {
