@@ -44,6 +44,19 @@
   overflow: hidden;
 }
 
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  /* this is chat gpt's code  */
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+}
+ 
+/* continuing with my code  */
 .contacts-table tbody td .avatar--initials {
   display: grid;
   place-items: center;

@@ -1,3 +1,6 @@
+import { renderAvatar } from "../../../src/components/contact-avatar/contact_avatar.view.js";
+
+
 function getInitials(fullName) {
   if (!fullName) return "?";
 
