@@ -3,7 +3,6 @@ export function getInitials(firstName, lastName) {
 }
 
 export function stringToColor(id) {
-  let hash = id;
-
-  return `hsl(${hash % 360}, 60%, 50%)`;
+  const hue = (id * 137) % 360; 
+  return `hsl(${hue}, 70%, 60%)`;
 }

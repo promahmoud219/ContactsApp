@@ -44,51 +44,29 @@
   overflow: hidden;
 }
 
-.avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  
-  /* this is chat gpt's code  */
-  font-weight: 600;
-  font-size: 14px;
-  color: white;
-}
  
-/* continuing with my code  */
-.contacts-table tbody td .avatar--initials {
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #1f6feb, #4ea1ff);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.contacts-table tbody td .avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  
-}
-
 .contacts-table tbody tr {
   transition: 0.2s ease;
   cursor: pointer; 
 }
+
 .contacts-table tbody tr:hover > td,
 .contacts-table tbody tr:hover > th {
   background: var(--bg-hover);
 }
+
 .contact-info .name-and-email .name{
   font-size: 14px;
   font-weight: 600;
 }
-.contact-info .name-and-email .email{
+
+
+.name-and-email .email {
   font-size: 12px;
-  color: var(--text-muted);  
+  color: var(--text);
 }
+
+ 
 
 .contacts-table th:first-child,
 .contacts-table td:first-child {

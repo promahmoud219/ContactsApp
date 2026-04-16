@@ -26,6 +26,7 @@ import "./styles/layout/page.css";
 import "./styles/features/contacts/contacts-table.css";
 import "./styles/features/add-contact/add-contact-form.css";
 import "./styles/features/modal/modal.css";
+import "./components/contact-avatar/contact_avatar.css";
 
 
 import { initModal } from "./features/modal/modal.js";
