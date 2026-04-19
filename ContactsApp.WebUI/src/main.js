@@ -43,19 +43,15 @@ initAddContact();
 
 
 
-
 document.addEventListener("click", (e) => {
+    const trigger = e.target.closest(".actions-btn, .dropdown-trigger");
 
-    if (e.target.closest(".actions-btn") || e.target.closest(".dropdown-trigger")) {
-        const btn = e.target.closest("button");
-        const container = btn.parentElement;
-        const menu = container.querySelector(".actions-menu, .dropdown-content");
-
+    if (trigger) { 
+        const menu = trigger.nextElementSibling; 
         toggleMenu(menu);
         return;
     }
 
-    if (!e.target.closest(".actions-menu") || e.target.classList.contains("action-cancel")) {
+    if (!e.target.closest(".actions-menu") || e.target.classList.contains("action-cancel")) 
         closeAllMenus();
-    }
 });

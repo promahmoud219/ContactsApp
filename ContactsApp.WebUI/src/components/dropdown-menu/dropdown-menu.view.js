@@ -45,6 +45,8 @@ export function renderDropdownMenu(options) {
 
 
 export function toggleMenu(menu) {
+  if (!menu) return;
+
   // بنشوف هل المنيو مخفية ولا لأ
   const isHidden = menu.hasAttribute("hidden");
 
