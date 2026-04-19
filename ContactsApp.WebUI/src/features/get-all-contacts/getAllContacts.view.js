@@ -1,4 +1,5 @@
-import { renderAvatar } from "../../../src/components/contact-avatar/contact_avatar.view.js";
+import { renderAvatar } from "../../components/contact-avatar/contact_avatar.view.js";
+import { renderDropdownMenu } from "../../components/dropdown-menu/dropdown-menu.view.js";
 
 function getSafeText(value, fallback = "-") {
   if (value === null || value === undefined || value === "") {
@@ -11,8 +12,14 @@ function getSafeText(value, fallback = "-") {
 
 export function renderContacts(contacts) {
   const tbody = document.querySelector(".contacts-table tbody");
+  if (!tbody) return; 
   tbody.innerHTML = "";
 
+  
+
+
+  
+  
   contacts.forEach(contact => {
     const tr = document.createElement("tr");
 
@@ -39,30 +46,36 @@ export function renderContacts(contacts) {
 
     detailsDiv.appendChild(nameDiv);
     detailsDiv.appendChild(emailDiv);
-
+    
     infoTd.appendChild(avatarElement);
     infoTd.appendChild(detailsDiv);
 
     tr.appendChild(infoTd);
+    
+   
 
-    const actionsCell = document.createElement("td");
-    actionsCell.className = "actions-cell";
-    actionsCell.innerHTML = `
-      <button class="actions-btn">⋯</button>
-
-      <div class="actions-menu" hidden>
-        <button class="action-update">Update</button>
-        <button class="action-delete">Delete</button>
-        <button class="action-cancel">Cancel</button>
-      </div>
-    </td>`;
     [contact.email, contact.address, contact.governorateName].forEach(text => {
       const td = document.createElement("td");
       td.textContent = getSafeText(text);
       tr.appendChild(td);
-      tr.appendChild(actionsCell);
     });
+    
+    // جوه الـ Loop بتاع contacts.forEach
+    const actionsTd = document.createElement("td");
+    actionsTd.className = "actions-cell";
 
+     // بنجهز "الداتا" اللي الزرار هيشيلها
+    const menuOptions = [
+      { label: "Update", className: "action-update", data: { id: contact.id } },
+      { label: "Delete", className: "action-delete", data: { id: contact.id } },
+      { label: "Cancel", className: "action-cancel" }
+    ]; 
+
+    // ننادي الكومبوننت
+    const dropdown = renderDropdownMenu(menuOptions);
+    actionsTd.appendChild(dropdown);
+
+    tr.appendChild(actionsTd);
     tbody.appendChild(tr);
   });
 }

@@ -37,12 +37,6 @@
   align-items: center;
   gap: 12px;
 }
-.contacts-table tbody td .avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  overflow: hidden;
-}
 
  
 .contacts-table tbody tr {

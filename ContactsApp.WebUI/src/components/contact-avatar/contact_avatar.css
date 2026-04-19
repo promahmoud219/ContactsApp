@@ -1,6 +1,5 @@
-/* الأفاتار الأساسي - ينفع في أي مكان */
 .avatar {
-  width: 45px; /* مقاس افتراضي ويمكن تغييره */
+  width: 45px;
   height: 45px;
   border-radius: 50%;
   overflow: hidden;
@@ -8,14 +7,13 @@
   align-items: center;
   justify-content: center;
   user-select: none;
-  flex-shrink: 0; /* عشان ميتعصرش لو الكلام اللي جنبه كتير */
+  flex-shrink: 0;
 }
 
-/* حالة الحروف (Initials) */
+
 .avatar--initials {
   display: grid;
   place-items: center;
-  /* background: linear-gradient(135deg, #1f6feb, #4ea1ff); */
   background: #cf0;
   background-image: linear-gradient(
     135deg, 
@@ -31,7 +29,6 @@
   text-transform: uppercase;
 }
 
-/* تنسيق الصورة جوه الأفاتار */
 .avatar img {
   width: 100%;
   height: 100%;

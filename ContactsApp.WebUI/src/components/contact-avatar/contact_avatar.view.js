@@ -5,7 +5,7 @@ export function renderAvatar(contact) {
   const container = document.createElement("div");
   container.classList.add("avatar--initials", "avatar");
 
-  /*   img is not going to be used for now, but we can add it later if needed "it's not easy"
+  /*   img is not going to be used for now, but we can add it later if needed "it's not easy, due to cdn, secuity, database, lots of other things"
   if (contact.imageUrl) {
     const img = document.createElement("img");
     img.src = contact.imageUrl;
