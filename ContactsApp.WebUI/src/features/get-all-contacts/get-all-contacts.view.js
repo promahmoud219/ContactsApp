@@ -12,14 +12,11 @@ function getSafeText(value, fallback = "-") {
 
 export function renderContacts(contacts) {
   const tbody = document.querySelector(".contacts-table tbody");
-  if (!tbody) return; 
+
+  if (!tbody) return;
   tbody.innerHTML = "";
 
-  
 
-
-  
-  
   contacts.forEach(contact => {
     const tr = document.createElement("tr");
 
@@ -46,32 +43,29 @@ export function renderContacts(contacts) {
 
     detailsDiv.appendChild(nameDiv);
     detailsDiv.appendChild(emailDiv);
-    
+
     infoTd.appendChild(avatarElement);
     infoTd.appendChild(detailsDiv);
 
     tr.appendChild(infoTd);
-    
-   
 
-    [contact.email, contact.address, contact.governorateName].forEach(text => {
+
+
+    [contact.phone, contact.email, contact.address, contact.governorateName].forEach(text => {
       const td = document.createElement("td");
       td.textContent = getSafeText(text);
       tr.appendChild(td);
     });
-    
-    // جوه الـ Loop بتاع contacts.forEach
+
     const actionsTd = document.createElement("td");
     actionsTd.className = "actions-cell";
 
-     // بنجهز "الداتا" اللي الزرار هيشيلها
     const menuOptions = [
       { label: "Update", className: "action-update", data: { id: contact.id } },
       { label: "Delete", className: "action-delete", data: { id: contact.id } },
       { label: "Cancel", className: "action-cancel" }
-    ]; 
+    ];
 
-    // ننادي الكومبوننت
     const dropdown = renderDropdownMenu(menuOptions);
     actionsTd.appendChild(dropdown);
 

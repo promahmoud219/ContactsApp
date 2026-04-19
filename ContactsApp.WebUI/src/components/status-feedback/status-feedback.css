@@ -1,0 +1,38 @@
+.status-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  width: 100%;
+}
+
+.status-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.status-message {
+  color: var(--text-muted);
+  font-size: 15px;
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+/* Spinner الاحترافي */
+.spinner {
+  width: 35px;
+  height: 35px;
+  border: 3px solid rgba(31, 111, 235, 0.1);
+  border-left-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* لو الحالة خطأ، نغير اللون للأحمر */
+.status--error .status-icon { color: #ef4444; }

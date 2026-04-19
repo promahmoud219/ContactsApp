@@ -1,7 +1,7 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_CONFIG } from "../../config/api.config.js";
 
 function buildUrl(url) {
-  return `${BASE_URL}${url}`;
+  return `${API_CONFIG.BASE_URL}${url}`;
 }
 
 async function handleResponse(response) {

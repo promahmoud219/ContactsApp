@@ -1,6 +1,6 @@
 import { openModal, closeModal } from "../modal/modal.js";
-import { createAddContactView } from "./addContact.view.js";
-import { createContact } from "./addContact.service.js";
+import { createAddContactView } from "./add-contact.view.js";
+import { createContact } from "./add-contact.service.js";
 
 export function initAddContact() {
   const btn = document.getElementById("btn-add-contact");

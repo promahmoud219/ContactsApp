@@ -31,8 +31,8 @@ import "./components/contact-avatar/contact_avatar.css";
 
 
 import { initModal } from "./features/modal/modal.js";
-import { initAddContact } from "./features/add-contact/addContact.controller.js";
-import { initGetAllContacts } from "./features/get-all-contacts/getAllContacts.controller.js";
+import { initAddContact } from "./features/add-contact/add-contact.controller.js";
+import { initGetAllContacts } from "./features/get-all-contacts/get-all-contacts.controller.js";
 
 import { toggleMenu, closeAllMenus } from "./components/dropdown-menu/dropdown-menu.view.js";
 

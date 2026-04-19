@@ -1,59 +1,90 @@
+/* الحاوية الأساسية */
 .actions-wrapper {
-  position: relative; /* ضروري عشان المنيو تظهر جنب الزرار */
-  display: inline-block;
+  position: relative;
+  display: flex;
+  justify-content: center; /* عشان الزرار يتسنطر في العمود */
 }
 
+/* الزرار نفسه */
 .actions-btn {
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 20px;
-  color: var(--text-muted);
-  padding: 4px 10px;
-  border-radius: 4px;
-  transition: 0.2s;
+  font-size: 18px;
+  color: #94a3b8; /* رمادي هادي جداً (Slate 400) */
+  padding: 8px;
+  border-radius: 50%; /* خليه دايرة عشان يبقى مودرن */
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .actions-btn:hover {
-  background: var(--bg-hover);
-  color: var(--text);
+  background: #fafcff; /* رمادي فاتح جداً عند الهوفر */
+  color: #1e293b; /* يغمق شوية لما يقف عليه */
+  transform: scale(1.05);
 }
 
+ 
+.actions-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.actions-btn:hover svg {
+  transform: rotate(90deg); /* حركة شيك جداً لما توقف على الزرار */
+  color: var(--primary);
+}
+/* المنيو (الدروب داون) */
 .actions-menu {
-  position: absolute;
-  right: 0; /* تظهر محاذية لليمين */
-  top: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-lg);
-  border-radius: 8px;
-  z-index: 100; /* عشان تظهر فوق باقي صفوف الجدول */
-  min-width: 130px;
+  /* position: absolute; */
+  right: 0;
+  top: calc(100% + 5px); /* سيب مسافة بسيطة تحت الزرار */
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* ظل ناعم جداً */
+  border-radius: 10px; /* كيرف محترم */
+  z-index: 100;
+  min-width: 150px;
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 6px;
+  overflow: hidden; /* عشان البوردر راديوس يبان في الأزرار */
+  display: none; /* مخفي افتراضياً */
 }
-
+ 
+/* أزرار الخيارات */
 .actions-menu button {
-  padding: 8px 12px;
+  padding: 10px 12px;
   border: none;
   background: transparent;
   text-align: left;
   cursor: pointer;
   border-radius: 6px;
-  font-size: 14px;
-  transition: 0.2s;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.15s;
 }
 
 .actions-menu button:hover {
-  background: var(--bg-hover);
+  background: #f8fafc;
+  color: var(--primary); /* يقلب أزرق تروكولر عند الهوفر */
 }
 
-/* لون خاص لزرار الحذف */
+/* خيار الحذف المرعب */
 .actions-menu button.action-delete {
-  color: #ef4444; /* أحمر "براند" */
+  color: #ef4444;
 }
 
 .actions-menu button.action-delete:hover {
   background: #fef2f2;
+  color: #dc2626;
 }
+
+

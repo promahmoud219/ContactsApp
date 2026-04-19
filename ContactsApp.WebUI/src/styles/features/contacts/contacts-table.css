@@ -12,8 +12,17 @@
   border-collapse: collapse;
   table-layout: fixed;
 }
+
+.contacts-table th:nth-child(1) { width: 5%; }   /*icon*/
+.contacts-table th:nth-child(2) { width: 20%; }  /*name*/
+.contacts-table th:nth-child(3) { width: 10%; }  /*phone*/
+.contacts-table th:nth-child(4) { width: 22.5%; }  /*email*/
+.contacts-table th:nth-child(5) { width: 22.5%; }  /*address*/
+.contacts-table th:nth-child(6) { width: 12%; }  /*governorate*/
+.contacts-table th:last-child { width: 8%; }    /*actions-icon*/
+
 .contacts-table thead{
-  background: var(--bg);
+  background: var(--bg); 
   font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
@@ -59,15 +68,17 @@
   font-size: 12px;
   color: var(--text);
 }
-
  
-
-.contacts-table th:first-child,
-.contacts-table td:first-child {
-  width: 5%;
-  
-}
 
 .contacts-table tr:hover td:first-child {
   border-top-left-radius: 0px; 
 }
+
+
+/* 1. اسمح للخلية إنها تظهر اللي براها */
+.contacts-table td {
+    overflow: visible !important;
+    position: relative; /* تأكيد */
+}
+
+ 
