@@ -1,8 +1,10 @@
 .page {
+  display: block;
   flex: 1;
+  min-height: 0;
   padding: 24px;
-  overflow: auto;
   background: var(--surface);
+  min-width: 0;
 }
 
 

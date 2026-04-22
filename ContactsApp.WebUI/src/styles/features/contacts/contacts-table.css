@@ -5,29 +5,47 @@
   box-shadow: var(--shadow-sm);
   padding: 0;
   width: 100%;
-  overflow: hidden; 
+  overflow: visible;
+  isolation: isolate;
 }
 .contacts-table table{
   width: 100%;
-  border-collapse: collapse;
+  overflow: clip;
+  border-collapse: separate;
+  /*i'll write the code for -> tiny gap between rows and columns */
+  border-spacing: 0 4px; /* vertical gap */
+
   table-layout: fixed;
 }
 
-.contacts-table th:nth-child(1) { width: 5%; }   /*icon*/
-.contacts-table th:nth-child(2) { width: 20%; }  /*name*/
-.contacts-table th:nth-child(3) { width: 10%; }  /*phone*/
-.contacts-table th:nth-child(4) { width: 22.5%; }  /*email*/
-.contacts-table th:nth-child(5) { width: 22.5%; }  /*address*/
-.contacts-table th:nth-child(6) { width: 12%; }  /*governorate*/
-.contacts-table th:last-child { width: 8%; }    /*actions-icon*/
+/* شيل العروض المئوية من كل الأعمدة، وحدد بس الحاجات الثابتة */
+.contacts-table th:nth-child(1) { width: 50px; }   /* الـ Checkbox محتاج عرض ثابت */
+.contacts-table th:nth-child(3) { width: 120px; }  /* الموبايل محتاج عرض ثابت */
+.contacts-table th:last-child { width: 80px; }     /* الأكشنز محتاجة عرض ثابت */
+
+/* عمود الاسم خليه هو اللي يفرش وياخد الباقي */
+.contacts-table th:nth-child(2) { width: auto; } 
+
+/* باقي الأعمدة اديها نسب عادية، ولما تختفي، عمود الاسم هياخد مساحتهم أوتوماتيك */
+.contacts-table th:nth-child(4) { width: 20%; }
+.contacts-table th:nth-child(5) { width: 20%; }
+.contacts-table th:nth-child(6) { width: 15%; }
+
 
 .contacts-table thead{
-  background: var(--bg); 
+  background: var(--bg);
   font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
 
 }
+
+/* .contacts-table thead tr{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 5% 20% 10% 22.5% 22.5% 12% 8%;
+}  */
+
 .contacts-table thead .select-all input, .contacts-table tbody .select-row input{ 
   width: 15px;
   height: 15px;
@@ -78,7 +96,57 @@
 /* 1. اسمح للخلية إنها تظهر اللي براها */
 .contacts-table td {
     overflow: visible !important;
-    position: relative; /* تأكيد */
+    /* تأكيد */
+    position: relative; 
+}
+.contacts-table thead tr th{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  box-shadow: inset 0 -1px 0 var(--border);
+  padding: 20px 20px;
+
 }
 
+
+
+/* media queries */
+
+@media (max-width: 1700px) {
+  .contacts-table th:nth-child(5),
+  .contacts-table td:nth-child(5) {
+    display: none;
+  }
+}
+
+@media (max-width: 1500px) {
+  .contacts-table th:nth-child(6),
+  .contacts-table td:nth-child(6) {
+    display: none;
+  }
+
+
+}
+
+@media (max-width: 1200px) {
+  .contacts-table th:nth-child(4),
+  .contacts-table td:nth-child(4) {
+    display: none;
+  }
+
+}
+
+@media (max-width: 950px) {
+  /* how to change the contacts table to be cards , i'll write the answer below: */
+  
+  .contacts-table{
+    display: block;
  
+  }
+  
+  .contacts-table th:nth-child(3),
+  .contacts-table td:nth-child(3) {
+    display: none;
+  } 
+}

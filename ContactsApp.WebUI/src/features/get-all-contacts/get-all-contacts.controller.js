@@ -33,7 +33,7 @@ export async function initGetAllContacts() {
     );
     tbody.appendChild(wrapInTd(error));
 
-    setTimeout(initGetAllContacts, 5000);
+    setTimeout(initGetAllContacts, 2000);
   }
 }
 

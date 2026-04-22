@@ -1,10 +1,12 @@
 .sidebar {
-  width: var(--sidebar-width);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column; 
   background: var(--surface);
   padding: 16px;
+  height: 100%;
+  position: sticky;
+  top: 0;
 }
 
 .sidebar .sidebar__top {
@@ -125,4 +127,47 @@
 
 .sidebar__footer:hover .user .user-info .email {
   color: var(--text);
+}
+
+
+/* media queries */
+
+@media (max-width: 1700px) {
+ 
+}
+
+@media (max-width: 1500px) {
+ 
+}
+
+@media (max-width: 1200px) {
+
+  .sidebar {
+    width: 250px;
+    padding: 12px 8px;
+  }
+  
+  .sidebar__nav{
+  }
+  
+  .sidebar .nav-item span{
+    display: none;
+  }
+  .sidebar .nav-item svg{
+    width: 25px;
+    height: 25px;
+  }
+
+  .sidebar .nav-item {
+    width: 50px;
+  }    
+
+
+}
+
+@media (max-width: 950px) {
+ 
+  .sidebar {
+    display: none;
+  }  
 }

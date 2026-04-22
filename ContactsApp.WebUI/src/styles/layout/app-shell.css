@@ -1,6 +1,16 @@
 .app-shell {
-  display: flex;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  margin: 0 auto;
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
+}
+
+
+@media (max-width: 1200px) {
+  .app-shell {
+    grid-template-columns: 100px 1fr;
+  }
+
 }
