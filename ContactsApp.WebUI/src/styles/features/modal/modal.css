@@ -5,20 +5,22 @@
   align-items: center;
   justify-content: center;
 }
+
 .modal[hidden] {
   display: none;
 }
+
 .modal__overlay {
   position: absolute;
-  inset: 0; 
-  background-color: rgba(28, 54, 108, 0.4);   
-  backdrop-filter: blur(8px);  
-  -webkit-backdrop-filter: blur(8px);  
+  inset: 0;
+  background-color: rgba(28, 54, 108, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .modal__content {
   position: relative;
-  z-index: 61;
+  z-index: 1;
 
   background: var(--surface);
   padding: 24px;
@@ -28,4 +30,9 @@
   max-width: 90%;
 
   box-shadow: 0 0 20px 1px var(--primary);
+}
+
+/* optional: open state modifier */
+.modal--open {
+  display: flex;
 }

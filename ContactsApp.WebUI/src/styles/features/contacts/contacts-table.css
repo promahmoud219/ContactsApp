@@ -1,152 +1,173 @@
-.contacts-table {
+/* ===================== */
+/* Contacts Block */
+/* ===================== */
+*{
+  text-align: left;
+}
+.contacts {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg); 
   box-shadow: var(--shadow-sm);
-  padding: 0;
   width: 100%;
-  overflow: visible;
   isolation: isolate;
+  overflow: hidden;
+  text-align: left;
 }
-.contacts-table table{
-  width: 100%;
-  overflow: clip;
-  border-collapse: separate;
-  /*i'll write the code for -> tiny gap between rows and columns */
-  border-spacing: 0 4px; /* vertical gap */
 
+/* ===================== */
+/* Table */
+/* ===================== */
+
+.contacts__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 ;
   table-layout: fixed;
 }
 
-/* شيل العروض المئوية من كل الأعمدة، وحدد بس الحاجات الثابتة */
-.contacts-table th:nth-child(1) { width: 50px; }   /* الـ Checkbox محتاج عرض ثابت */
-.contacts-table th:nth-child(3) { width: 120px; }  /* الموبايل محتاج عرض ثابت */
-.contacts-table th:last-child { width: 80px; }     /* الأكشنز محتاجة عرض ثابت */
+/* ===================== */
+/* Head */
+/* ===================== */
 
-/* عمود الاسم خليه هو اللي يفرش وياخد الباقي */
-.contacts-table th:nth-child(2) { width: auto; } 
-
-/* باقي الأعمدة اديها نسب عادية، ولما تختفي، عمود الاسم هياخد مساحتهم أوتوماتيك */
-.contacts-table th:nth-child(4) { width: 20%; }
-.contacts-table th:nth-child(5) { width: 20%; }
-.contacts-table th:nth-child(6) { width: 15%; }
-
-
-.contacts-table thead{
-  background: var(--bg);
+.contacts__head {
   font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
-
 }
 
-/* .contacts-table thead tr{
-  width: 100%;
-  display: grid;
-  grid-template-columns: 5% 20% 10% 22.5% 22.5% 12% 8%;
-}  */
-
-.contacts-table thead .select-all input, .contacts-table tbody .select-row input{ 
-  width: 15px;
-  height: 15px;
-  text-align: center;
-} 
- 
-.contacts-table th,
-.contacts-table td { 
-  padding: 16px 20px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-}
-
-.contacts-table .contact-info{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
- 
-.contacts-table tbody tr {
-  transition: 0.2s ease;
-  cursor: pointer; 
-}
-
-.contacts-table tbody tr:hover > td,
-.contacts-table tbody tr:hover > th {
-  background: var(--bg-hover);
-}
-
-.contact-info .name-and-email .name{
-  font-size: 14px;
-  font-weight: 600;
-}
-
-
-.name-and-email .email {
-  font-size: 12px;
-  color: var(--text);
-}
- 
-
-.contacts-table tr:hover td:first-child {
-  border-top-left-radius: 0px; 
-}
-
-
-/* 1. اسمح للخلية إنها تظهر اللي براها */
-.contacts-table td {
-    overflow: visible !important;
-    /* تأكيد */
-    position: relative; 
-}
-.contacts-table thead tr th{
+.contacts__head th {
   position: sticky;
   top: 0;
   z-index: 20;
   background: var(--bg);
   box-shadow: inset 0 -1px 0 var(--border);
-  padding: 20px 20px;
+  padding: 20px 0;
+}
 
+/* ===================== */
+/* Cells */
+/* ===================== */
+
+.contacts__cell {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+
+/* .contacts__cell--select {
+  width: 10%;
+} */
+
+.contacts__cell--phone {
+  width: 120px;
+}
+
+.contacts__cell--actions {
+  width: 80px;
+}
+
+.contacts__cell--actions {
+  width: 80px;
 }
 
 
 
-/* media queries */
+/* ===================== */
+/* Checkbox */
+/* ===================== */
+
+.contacts__checkbox {
+  width: 20px;
+  height: 20px;
+  margin-left: 40px;
+}
+
+/* ===================== */
+/* Row */
+/* ===================== */
+
+.contacts__row {
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.contacts__row:hover > .contacts__cell {
+  background: var(--bg-hover);
+}
+
+/* ===================== */
+/* Contact Info */
+/* ===================== */
+
+.contacts__cell--info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contacts__name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.contacts__email {
+  font-size: 12px;
+  color: var(--text);
+}
+
+/* ===================== */
+/* Overflow Fix */
+/* ===================== */
+
+.contacts__cell {
+  overflow: visible;
+}
+
+/* ===================== */
+/* Media Queries */
+/* ===================== */
+
+@media (max-width: 2800px) {
+  .contacts__header:nth-child(1) { width: 10%;}   
+  .contacts__header:nth-child(2) { width: 20%;}   
+  .contacts__header:nth-child(3) { width: 10%;}
+  .contacts__header:nth-child(4) { width: 20%;} 
+  .contacts__header:nth-child(5) { width: 15%;}  
+  .contacts__header:nth-child(6) { width: 10%; } 
+  .contacts__header:nth-child(7) { width: 10%; } 
+}
 
 @media (max-width: 1700px) {
-  .contacts-table th:nth-child(5),
-  .contacts-table td:nth-child(5) {
+  .contacts__cell--address,
+  .contacts__header--address {
     display: none;
   }
+  
 }
 
 @media (max-width: 1500px) {
-  .contacts-table th:nth-child(6),
-  .contacts-table td:nth-child(6) {
+  .contacts__cell--governorate,
+  .contacts__header--governorate {
     display: none;
   }
-
-
 }
 
 @media (max-width: 1200px) {
-  .contacts-table th:nth-child(4),
-  .contacts-table td:nth-child(4) {
+  .contacts__cell--email,
+  .contacts__header--email {
     display: none;
   }
-
 }
 
 @media (max-width: 950px) {
-  /* how to change the contacts table to be cards , i'll write the answer below: */
-  
-  .contacts-table{
+  .contacts {
     display: block;
- 
   }
-  
-  .contacts-table th:nth-child(3),
-  .contacts-table td:nth-child(3) {
+
+  .contacts__cell--phone,
+  .contacts__header--phone {
     display: none;
-  } 
+  }
 }

@@ -3,43 +3,44 @@ let isModalOpen = false;
 
 export function initModal(selector) {
   modal = document.querySelector(selector);
+  if (!modal) return;
 
-  // Ensure modal starts hidden even if the attribute is missing/removed
-  modal.setAttribute("hidden", true);
+  modal.setAttribute("hidden", "");
   isModalOpen = false;
 
-  modal.querySelector(".modal__overlay")
-    .addEventListener("click", closeModal);
+  modal
+    .querySelector(".modal__overlay")
+    ?.addEventListener("click", closeModal);
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeModal();
-    }
+    if (e.key === "Escape") closeModal();
   });
 }
 
 export function openModal(content) {
-  if (isModalOpen) return;
+  if (!modal || isModalOpen) return;
 
   document.body.style.overflow = "hidden";
 
   const container = modal.querySelector(".modal__content");
-  container.innerHTML = "";
-  container.appendChild(content);
+  if (!container) return;
 
-  modal.querySelector("input")?.focus();
+  container.replaceChildren(content);
+
+  content.querySelector("input")?.focus();
+
   modal.removeAttribute("hidden");
   isModalOpen = true;
 }
 
 export function closeModal() {
-  if (!isModalOpen && modal?.hasAttribute("hidden")) return;
+  if (!modal || (!isModalOpen && modal.hasAttribute("hidden"))) return;
 
-  modal.setAttribute("hidden", true);
+  modal.setAttribute("hidden", "");
   document.body.style.overflow = "";
 
   const container = modal.querySelector(".modal__content");
-  if (container) container.innerHTML = "";
+  container?.replaceChildren();
 
   isModalOpen = false;
 }

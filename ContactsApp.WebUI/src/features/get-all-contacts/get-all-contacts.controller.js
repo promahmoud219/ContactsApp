@@ -1,23 +1,20 @@
 import { getAllContacts } from "./get-all-contacts.service.js";
 import { renderContacts } from "./get-all-contacts.view.js";
 import { renderStatusFeedback } from "../../components/status-feedback/status-feedback.view.js";
-
 import { UI_MESSAGES } from "../../utils/uiMessages.js";
 
-
-
-
 export async function initGetAllContacts() {
-  const tbody = document.querySelector(".contacts-table tbody");
+  const tbody = document.querySelector(".contacts__body");
 
   if (!tbody) {
     console.error("Could not find contacts table body.");
     return;
   }
 
-  tbody.innerHTML = "";
+  tbody.replaceChildren();
+
   const loading = renderStatusFeedback("loading", UI_MESSAGES.LOADING_CONTACTS);
-  tbody.appendChild(wrapInTd(loading));
+  tbody.appendChild(wrapInRow(loading));
 
   try {
     const contacts = await getAllContacts();
@@ -25,23 +22,30 @@ export async function initGetAllContacts() {
     console.log(UI_MESSAGES.GetContactsSUCCESSMsg);
   } catch (err) {
     console.error(UI_MESSAGES.GetContactsFAILUREMsg, err);
-    tbody.innerHTML = "";
+
+    tbody.replaceChildren();
 
     const error = renderStatusFeedback(
       "error",
       UI_MESSAGES.GetContactsFAILUREMsg
     );
-    tbody.appendChild(wrapInTd(error));
+
+    tbody.appendChild(wrapInRow(error));
 
     setTimeout(initGetAllContacts, 2000);
   }
 }
 
-function wrapInTd(element) {
+function wrapInRow(element) {
   const tr = document.createElement("tr");
+  tr.className = "contacts__row";
+
   const td = document.createElement("td");
-  td.setAttribute("colspan", "6");
+  td.className = "contacts__cell contacts__cell--status";
+  td.colSpan = 7;
+
   td.appendChild(element);
   tr.appendChild(td);
+
   return tr;
 }

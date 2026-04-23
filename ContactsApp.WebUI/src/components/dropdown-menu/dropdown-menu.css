@@ -1,65 +1,56 @@
-/* الحاوية الأساسية */
-.actions-wrapper {
+/* ===================== */
+/* Dropdown */
+/* ===================== */
+
+.dropdown {
   position: relative;
   display: flex;
-  justify-content: center; /* عشان الزرار يتسنطر في العمود */
+  justify-content: flex-start;
 }
 
-/* الزرار نفسه */
-.actions-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: #94a3b8; /* رمادي هادي جداً (Slate 400) */
-  padding: 8px;
-  border-radius: 50%; /* خليه دايرة عشان يبقى مودرن */
+/* trigger */
+.dropdown__trigger {
   width: 36px;
   height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  color: #94a3b8; 
 }
 
-.actions-btn:hover {
-  background: #fafcff; /* رمادي فاتح جداً عند الهوفر */
-  color: #1e293b; /* يغمق شوية لما يقف عليه */
-  transform: scale(1.05);
-}
-
- 
-.actions-btn svg {
+/* icon */
+.dropdown__icon-svg {
+  width: 18px;
+  height: 18px;
   transition: transform 0.2s ease;
 }
 
-.actions-btn:hover svg {
-  transform: rotate(90deg); /* حركة شيك جداً لما توقف على الزرار */
-  color: var(--primary);
+.dropdown__trigger:hover .dropdown__icon-svg {
+  transform: rotate(90deg);
+  /* fill: var(--secondary); */
+  
 }
-/* المنيو (الدروب داون) */
-.actions-menu {
+
+/* menu */
+.dropdown__menu {
   position: absolute;
   right: 0;
-  top: calc(100% + 5px); /* سيب مسافة بسيطة تحت الزرار */
-  background: #ffffff;
+  top: calc(100% + 5px);
+  background: #fff;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* ظل ناعم جداً */
-  border-radius: 10px; /* كيرف محترم */
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1);
+  border-radius: 10px;
   z-index: 100;
   min-width: 150px;
   display: flex;
   flex-direction: column;
   padding: 6px;
-  overflow: hidden;
 }
 
-.actions-menu[hidden] {
+.dropdown__menu[hidden] {
   display: none;
 }
- 
-/* أزرار الخيارات */
-.actions-menu button {
+
+/* items */
+.dropdown__item {
   padding: 10px 12px;
   border: none;
   background: transparent;
@@ -69,32 +60,26 @@
   font-size: 13px;
   font-weight: 500;
   color: #475569;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   transition: 0.15s;
 }
 
-.actions-menu button:hover {
+.dropdown__item:hover {
   background: #f8fafc;
-  color: var(--primary); /* يقلب أزرق تروكولر عند الهوفر */
+  color: var(--primary);
 }
 
-/* خيار الحذف المرعب */
-.actions-menu button.action-delete {
+/* modifiers */
+.dropdown__item--delete {
   color: #ef4444;
 }
 
-.actions-menu button.action-delete:hover {
+.dropdown__item--delete:hover {
   background: #fef2f2;
   color: #dc2626;
 }
 
-
-
-/* المنيو لما تفتح لفوق */
-.contacts-table tr:nth-last-child(-n+3) .actions-wrapper .actions-menu {
-    top: auto;
-    bottom: calc(100% + 5px); /* بتطلع فوق الزرار بدل ما تنزل تحته */
-    box-shadow: 0 -10px 15px -3px rgba(0, 0, 0, 0.1); /* الظل يكون لفوق برضه */
+/* open upward modifier */
+.dropdown--up .dropdown__menu {
+  top: auto;
+  bottom: calc(100% + 5px);
 }

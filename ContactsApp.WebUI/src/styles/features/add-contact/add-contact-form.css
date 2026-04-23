@@ -1,72 +1,62 @@
+/* ===================== */
+/* Modal Form */
+/* ===================== */
 
-.form-group {
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* field */
+.modal__field {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 16px;
 }
 
-.form-group label {
+/* label */
+.modal__label {
   font-size: 13px;
   color: var(--text-muted);
 }
 
-
-form input {
+/* inputs */
+.modal__input,
+.modal__select {
   height: 40px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   padding: 0 12px;
   outline: none;
+  background: var(--bg);
+  color: var(--text);
 }
 
-form .modal__actions {
+/* actions */
+.modal__actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
 }
 
-form button {
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 10px 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.2s;
-}
-form #btn-secondary {
+/* buttons */
+.modal__actions .btn--secondary {
   background: transparent;
   color: var(--text);
   border: 1px solid var(--border);
 }
-form #btn-secondary:hover {
+
+.modal__actions .btn--secondary:hover {
   background: var(--border);
 }
 
-form #btn-primary {
+.modal__actions .btn--primary {
   background: var(--primary);
   color: var(--bg);
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 10px 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.2s;
 }
-form #btn-primary:hover {
+
+.modal__actions .btn--primary:hover {
   background: var(--primary-hover);
 }
- 
-
-
-form select {
-  height: 40px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  padding: 0 12px;
-  background: var(--bg);
-  color: var(--text);
-  outline: none;
-}
-

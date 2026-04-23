@@ -2,68 +2,77 @@ import { renderAvatar } from "../../components/contact-avatar/contact_avatar.vie
 import { renderDropdownMenu } from "../../components/dropdown-menu/dropdown-menu.view.js";
 
 function getSafeText(value, fallback = "-") {
-  if (value === null || value === undefined || value === "") {
-    return fallback;
-  }
-
-  return value;
+  return value ?? fallback;
 }
 
-
 export function renderContacts(contacts) {
-  const tbody = document.querySelector(".contacts-table tbody");
-
+  const tbody = document.querySelector(".contacts__body");
   if (!tbody) return;
-  tbody.innerHTML = "";
 
+  tbody.innerHTML = "";
 
   contacts.forEach(contact => {
     const tr = document.createElement("tr");
+    tr.className = "contacts__row";
+
+    // ---------------------
+    // Checkbox Cell
+    // ---------------------
 
     const checkTd = document.createElement("td");
-    checkTd.className = "select-row";
-    checkTd.innerHTML = `<input type="checkbox" class="row-checkbox">`;
+    checkTd.className = "contacts__cell contacts__cell--select";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "contacts__checkbox";
+
+    checkTd.appendChild(checkbox);
     tr.appendChild(checkTd);
 
+    // =====================
+    // Contact Info Cell
+    // =====================
     const infoTd = document.createElement("td");
-    infoTd.className = "contact-info";
+    infoTd.className = "contacts__cell contacts__cell--info";
 
     const avatarElement = renderAvatar(contact);
 
     const detailsDiv = document.createElement("div");
-    detailsDiv.className = "name-and-email";
+    detailsDiv.className = "contacts__details";
 
     const nameDiv = document.createElement("div");
-    nameDiv.className = "name";
+    nameDiv.className = "contacts__name";
     nameDiv.textContent = getSafeText(contact.fullName, "Unknown");
 
-    const emailDiv = document.createElement("div");
-    emailDiv.className = "email";
-    emailDiv.textContent = getSafeText(contact.email);
 
     detailsDiv.appendChild(nameDiv);
-    detailsDiv.appendChild(emailDiv);
 
     infoTd.appendChild(avatarElement);
     infoTd.appendChild(detailsDiv);
 
     tr.appendChild(infoTd);
 
+    // =====================
+    // باقي الأعمدة
+    // =====================
+    [contact.phone, contact.email, contact.address, contact.governorateName]
+      .forEach(text => {
+        const td = document.createElement("td");
+        td.className = "contacts__cell";
+        td.textContent = getSafeText(text);
+        tr.appendChild(td);
+      });
 
-
-    [contact.phone, contact.email, contact.address, contact.governorateName].forEach(text => {
-      const td = document.createElement("td");
-      td.textContent = getSafeText(text);
-      tr.appendChild(td);
-    });
-
+    // =====================
+    // Actions Cell
+    // =====================
     const actionsTd = document.createElement("td");
-    actionsTd.className = "actions-cell";
+    actionsTd.className = "contacts__cell contacts__cell--actions";
 
     const menuOptions = [
-      { label: "Update", className: "action-update", data: { id: contact.id } },
-      { label: "Delete", className: "action-delete", data: { id: contact.id } },
-      { label: "Cancel", className: "action-cancel" }
+      { label: "Update", className: "dropdown__item--update", data: { id: contact.id } },
+      { label: "Delete", className: "dropdown__item--delete", data: { id: contact.id } },
+      { label: "Cancel", className: "dropdown__item--cancel" }
     ];
 
     const dropdown = renderDropdownMenu(menuOptions);
