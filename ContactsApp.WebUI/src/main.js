@@ -7,9 +7,9 @@ import "./styles/layout/topbar.css";
 import "./styles/layout/app-main.css";
 import "./styles/layout/page.css";
 
-import "./styles/features/contacts/contacts-table.css";
-import "./styles/features/add-contact/add-contact-form.css";
-import "./styles/features/modal/modal.css";
+import "./features/get-all-contacts/contacts-table.css";
+import "./features/add-contact/add-contact-form.css";
+import "./features/modal/modal.css";
 
 import "./components/contact-avatar/contact_avatar.css";
 
