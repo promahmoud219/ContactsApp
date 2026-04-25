@@ -39,3 +39,14 @@ export async function post(url, data) {
 
   return handleResponse(response);
 }
+
+export async function put(url, data) {
+  const response = await fetch(buildUrl(url), {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  }); 
+  return handleResponse(response);
+}

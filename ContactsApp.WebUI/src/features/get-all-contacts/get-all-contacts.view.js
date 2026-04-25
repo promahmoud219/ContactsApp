@@ -15,10 +15,6 @@ export function renderContacts(contacts) {
     const tr = document.createElement("tr");
     tr.className = "contacts__row";
 
-    // ---------------------
-    // Checkbox Cell
-    // ---------------------
-
     const checkTd = document.createElement("td");
     checkTd.className = "contacts__cell contacts__cell--select";
 
@@ -29,9 +25,6 @@ export function renderContacts(contacts) {
     checkTd.appendChild(checkbox);
     tr.appendChild(checkTd);
 
-    // =====================
-    // Contact Info Cell
-    // =====================
     const infoTd = document.createElement("td");
     infoTd.className = "contacts__cell contacts__cell--info";
 
@@ -44,7 +37,6 @@ export function renderContacts(contacts) {
     nameDiv.className = "contacts__name";
     nameDiv.textContent = getSafeText(contact.fullName, "Unknown");
 
-
     detailsDiv.appendChild(nameDiv);
 
     infoTd.appendChild(avatarElement);
@@ -52,20 +44,13 @@ export function renderContacts(contacts) {
 
     tr.appendChild(infoTd);
 
-    // =====================
-    // باقي الأعمدة
-    // =====================
-    [contact.phone, contact.email, contact.address, contact.governorateName]
-      .forEach(text => {
-        const td = document.createElement("td");
-        td.className = "contacts__cell";
-        td.textContent = getSafeText(text);
-        tr.appendChild(td);
-      });
+    [contact.phone, contact.email, contact.address, contact.governorateName].forEach(text => {
+      const td = document.createElement("td");
+      td.className = "contacts__cell";
+      td.textContent = getSafeText(text);
+      tr.appendChild(td);
+    });
 
-    // =====================
-    // Actions Cell
-    // =====================
     const actionsTd = document.createElement("td");
     actionsTd.className = "contacts__cell contacts__cell--actions";
 

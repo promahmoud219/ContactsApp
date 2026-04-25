@@ -1,38 +1,38 @@
-export function createAddContactView() {
+export function renderAddContactForm() {
   const form = document.createElement("form");
-  form.className = "modal__form";
+  form.className = "form";
 
   form.innerHTML = `
-    <h2 class="modal__title">Add Contact</h2>
+    <h2 class="form__title">Add Contact</h2>
 
-    <div class="modal__field">
-      <label class="modal__label">First Name</label>
-      <input class="modal__input" type="text" name="firstName" required />
+    <div class="form__field">
+      <label class="form__label">First Name</label>
+      <input class="form__input" type="text" name="firstName" required />
     </div>
 
-    <div class="modal__field">
-      <label class="modal__label">Last Name</label>
-      <input class="modal__input" type="text" name="lastName" required />
+    <div class="form__field">
+      <label class="form__label">Last Name</label>
+      <input class="form__input" type="text" name="lastName" required />
     </div>
 
-    <div class="modal__field">
-      <label class="modal__label">Phone</label>
-      <input class="modal__input" type="tel" name="phone" />
+    <div class="form__field">
+      <label class="form__label">Phone</label>
+      <input class="form__input" type="tel" name="phone" />
     </div>
 
-    <div class="modal__field">
-      <label class="modal__label">Email</label>
-      <input class="modal__input" type="email" name="email" />
+    <div class="form__field">
+      <label class="form__label">Email</label>
+      <input class="form__input" type="email" name="email" />
     </div>
 
-    <div class="modal__field">
-      <label class="modal__label">Address</label>
-      <input class="modal__input" type="text" name="address" />
+    <div class="form__field">
+      <label class="form__label">Address</label>
+      <input class="form__input" type="text" name="address" />
     </div>
 
-    <div class="modal__field">
-      <label class="modal__label">Governorate</label>
-      <select class="modal__select" name="governorateId" required>
+    <div class="form__field">
+      <label class="form__label">Governorate</label>
+      <select class="form__select" name="governorateId" required>
         <option value="" disabled selected>Select governorate</option>
         <option value="1">Cairo</option>
         <option value="2">Giza</option>
@@ -42,8 +42,8 @@ export function createAddContactView() {
       </select>
     </div>
 
-    <div class="modal__actions">
-      <button type="button" class="btn btn--secondary modal__cancel-btn">Cancel</button>
+    <div class="form__actions">
+      <button type="button" class="btn btn--secondary btn--cancel">Cancel</button>
       <button type="submit" class="btn btn--primary">Save</button>
     </div>
   `;

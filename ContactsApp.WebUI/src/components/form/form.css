@@ -1,14 +1,14 @@
 /* ===================== */
-/* Modal Form */
+/* form Form */
 /* ===================== */
 
-.modal__form {
+.form__form {
   display: flex;
   flex-direction: column;
 }
 
 /* field */
-.modal__field {
+.form__field {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -16,14 +16,14 @@
 }
 
 /* label */
-.modal__label {
+.form__label {
   font-size: 13px;
   color: var(--text-muted);
 }
 
 /* inputs */
-.modal__input,
-.modal__select {
+.form__input,
+.form__select {
   height: 40px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
@@ -34,7 +34,7 @@
 }
 
 /* actions */
-.modal__actions {
+.form__actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
@@ -42,21 +42,21 @@
 }
 
 /* buttons */
-.modal__actions .btn--secondary {
+.form__actions .btn--secondary {
   background: transparent;
   color: var(--text);
   border: 1px solid var(--border);
 }
 
-.modal__actions .btn--secondary:hover {
+.form__actions .btn--secondary:hover {
   background: var(--border);
 }
 
-.modal__actions .btn--primary {
+.form__actions .btn--primary {
   background: var(--primary);
   color: var(--bg);
 }
 
-.modal__actions .btn--primary:hover {
+.form__actions .btn--primary:hover {
   background: var(--primary-hover);
 }

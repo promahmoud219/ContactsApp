@@ -1,5 +1,5 @@
-import { openModal, closeModal } from "../modal/modal.js";
-import { createAddContactView } from "./add-contact.view.js";
+import { openModal, closeModal } from "../../components/modal/modal.controller.js";
+import { renderAddContactForm } from "./add-contact.view.js";
 import { createContact } from "./add-contact.service.js";
 
 export function initAddContact() {
@@ -10,13 +10,10 @@ export function initAddContact() {
 }
 
 function handleOpen() {
-  const form = createAddContactView();
+  const form = renderAddContactForm();
 
   form.addEventListener("submit", handleSubmit);
-
-  form
-    .querySelector(".modal__cancel-btn")
-    .addEventListener("click", closeModal);
+  form.querySelector(".btn--cancel")?.addEventListener("click", closeModal);
 
   openModal(form);
 }
@@ -45,11 +42,11 @@ async function handleSubmit(e) {
     const result = await createContact(contact);
     console.log("SUCCESS:", result);
 
-    alert("Contact created successfully ✅");
+    alert("Contact created successfully.");
     closeModal();
     e.target.reset();
   } catch (err) {
     console.error("ERROR:", err);
-    alert("Something went wrong ❌");
+    alert("Something went wrong.");
   }
 }
