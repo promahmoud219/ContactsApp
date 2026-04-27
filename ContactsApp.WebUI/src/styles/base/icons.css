@@ -1,20 +1,17 @@
 /* ===================== */
 /* Icon */
 /* ===================== */
-
-.icon {
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-
-  fill: currentColor;
-  flex-shrink: 0;
-}
+ 
 
 /* sizes */
 .icon--sm {
   width: 14px;
   height: 14px;
+}
+
+.icon--mg {
+  width: 18px;
+  height: 18px;
 }
 
 .icon--lg {

@@ -1,5 +1,5 @@
 /* ===================== */
-/* Button (Base) */
+/* Button */
 /* ===================== */
 
 .btn {
@@ -7,34 +7,29 @@
   align-items: center;
   justify-content: center;
 
-  border: none;
-  border-radius: var(--radius-md);
   padding: 10px 16px;
 
-  font-size: 14px;
-  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-lg);
+
+  font-size: var(--text-md);
+  font-weight: var(--font-medium);
+
   cursor: pointer;
+  transition: 0.2s;
 
   background: transparent;
   color: var(--text);
-
-  transition: all 0.2s ease;
-}
-
-/* icon inside button */
-.btn__icon {
-  width: 18px;
-  height: 18px;
-}
+  
+} 
 
 
-/* ===================== */
-/* Button Variants */
-/* ===================== */
 
+
+/* variants */
 .btn--primary {
   background: var(--primary);
-  color: var(--bg);
+  color: #fff;
 }
 
 .btn--primary:hover {
@@ -42,35 +37,22 @@
 }
 
 .btn--secondary {
-  background: transparent;
   border: 1px solid var(--border);
 }
 
 .btn--secondary:hover {
-  background: var(--border);
+  background: var(--surface);
 }
 
+.btn--link {
+  background: none;
+  color: var(--primary);
+  padding: 0;
+}
 
-/* ===================== */
-/* Size / shape modifiers */
-/* ===================== */
-
+/* icon button */
 .btn--icon {
-  width: 36px;  
+  width: 36px;
   height: 36px;
   padding: 0;
-  border-radius: 50%;
-}  
-
-
-/* ===================== */
-/* State modifiers */
-/* ===================== */
-.btn--active {
-  background: var(--primary);
-  color: white;
-}
-
-.btn--active .btn__icon {
-  fill: white;
 }

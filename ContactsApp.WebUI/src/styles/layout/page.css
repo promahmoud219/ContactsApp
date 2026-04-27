@@ -2,7 +2,7 @@
   display: block;
   flex: 1;
   min-height: 0;
-  padding: 24px;
+  padding: var(--space-5);
   background: var(--surface);
   min-width: 0;
 }
@@ -20,7 +20,8 @@
 
 .page__title {
   margin: 0;
-  font-size: 32px;
+  font-size: 16px;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -29,52 +30,8 @@
   align-items: center;
   gap: 12px;
 }
-
-/* ===================== */
-/* Base Button */
-/* ===================== */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid transparent;
-  border-radius: var(--radius-sm);
-  font-weight: 300;
-  font-size: 2em;
-  background: transparent;
-  cursor: pointer;
-  transition: 0.2s;
-  padding: 8px;
-
-}
-
-/* hover */
-.btn:hover {
-  border: var(--primary) 1px solid;
-  color: var(--text);
-}
-
-/* icon inside button */
-.btn__icon {
-  width: 20px;
-  height: 20px;
-  display: block;
-}
-
-/* correct hover behavior */
-.btn:hover .btn__icon {
-  fill: white;
-}
-
-/* ===================== */
-/* Toolbar Buttons */
-/* ===================== */
-
-.toolbar__btn {
-  /* optional: override لو عايز فرق */
-}
-
+ 
+ 
 /* ===================== */
 /* View Toggle */
 /* ===================== */
