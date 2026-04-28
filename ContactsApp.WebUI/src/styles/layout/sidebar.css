@@ -54,31 +54,48 @@
   color: var(--text-muted);
   text-decoration: none;
   cursor: pointer;
-  transition: 0.2s;
-  
+  transition: 0.2s; 
 }
+
 .sidebar__nav-text{
-  color: var(--text);
+  color: var(--text-muted);
   font-weight: var(--font-medium); 
+  transition: 0.2s; 
+  letter-spacing: 0.02345em;
+  text-transform: capitalize;
+  white-space: nowrap;
 }
+
 .sidebar__nav-icon {
   width: 20px;
   height: 20px; 
   display: flex;
   align-items: center;
   justify-content: center;  
+  transition: 0.2s; 
 }
+
+.sidebar__nav-item:hover .sidebar__nav-text,
+.sidebar__nav-item--active .sidebar__nav-text
+{
+  color: var(--text);
+  text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
+}
+.sidebar__nav-item:hover .sidebar__nav-icon,
+.sidebar__nav-item--active .sidebar__nav-icon {
+  color: var(--text);
+}
+
 
 .sidebar__nav-item:hover {
   background: var(--bg);
   color: var(--text); 
+  font-weight: var(--font-bold);
 }
  
 .sidebar__nav-item--active {
   color: var(--text);
-  font-weight: 500; 
   background: var(--bg);
-  box-shadow: var(--shadow-inset-sm);
 }
     
 
