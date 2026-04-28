@@ -1,5 +1,9 @@
 import "./styles/base/reset.css";
 import "./styles/base/variables.css";
+import "./styles/base/buttons.css";
+import "./styles/base/icons.css";
+import "./styles/base/inputs.css";
+import "./styles/base/text.css";
 
 import "./styles/layout/app-shell.css";
 import "./styles/layout/sidebar.css";

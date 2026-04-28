@@ -42,18 +42,11 @@
 }
 
 /* buttons */
-.form__actions .btn--secondary {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
 .form__actions .btn--secondary:hover {
   background: var(--border);
 }
 
 .form__actions .btn--primary {
-  background: var(--primary);
   color: var(--bg);
 }
 

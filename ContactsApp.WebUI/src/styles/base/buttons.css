@@ -21,10 +21,42 @@
   background: transparent;
   color: var(--text);
   
+  position: relative;
 } 
 
+/* رسم الـ Tooltip */
+.btn::after {
+  content: attr(data-tooltip); /* بيسحب النص من الـ HTML */
+  position: absolute;
+  bottom: 120%; /* يظهر فوق الزرار */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap; 
+  pointer-events: none;
+  transition: 0.2s ease;
+  z-index: 110;
+  visibility: hidden;
+  opacity: 0;
+}
 
+/* إظهار التلميح عند الهوفر */
+.btn:hover::after {
+  visibility: visible;
+  bottom: 110%; /* حركة بسيطة لفوق عند الظهور */
+  opacity: 1;
 
+}
+
+/* إخفاء الـ Tooltip لو الـ data-tooltip فارغ */
+.btn[data-tooltip=""]::after,
+.btn:not([data-tooltip])::after {
+  display: none;
+}
 
 /* variants */
 .btn--primary {

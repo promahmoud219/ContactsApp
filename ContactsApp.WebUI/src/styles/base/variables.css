@@ -20,7 +20,7 @@
   --text-muted: #64748b;
   --border: #e2e8f0;
 
-  --primary: #1f6feb;
+  --primary: hsl(216, 84%, 52%, .9);
   --primary-hover: #1a5fd0;
   --primary-soft: rgba(31, 111, 235, 0.1);
 
@@ -33,6 +33,8 @@
   --radius-lg: 12px;
 
   /* shadows */
-  --shadow-sm-outset: 0 0 0 1px rgba(0, 0, 0, 0.05);
-  --shadow-inset-sm: inset 0 0 0 1px var(--primary);
+  --shadow-outset-sm: 0 0 0 1px var(--primary);
+  --shadow-inset-sm: inset 0 0 0 1px  var(--primary);
+  --shadow-outset-lg: 0 0 0 2px var(--primary);
+  --shadow-inset-lg: inset 0 0 0 2px var(--primary);
 }

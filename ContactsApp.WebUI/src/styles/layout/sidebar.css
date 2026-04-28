@@ -4,7 +4,7 @@
   flex-direction: column; 
   background: var(--surface);
   padding: 16px;
-  height: 100%;
+  height: 100vh;
   position: sticky;
   top: 0;
 }
@@ -34,6 +34,10 @@
 .sidebar__brand-link path {
   fill: var(--primary); 
 }
+
+/* ============== */
+/* navigation */
+/* ============== */
 
 .sidebar__nav {
   display: flex;
@@ -76,31 +80,12 @@
   background: var(--bg);
   box-shadow: var(--shadow-inset-sm);
 }
-   
+    
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ============== */
+/* footer */
+/* ============== */
 
 .sidebar__footer {
   border-top: 1px solid var(--border);
@@ -109,7 +94,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   color: var(--text-muted);
   text-decoration: none;
   cursor: pointer;
