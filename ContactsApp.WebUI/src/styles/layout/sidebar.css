@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column; 
   background: var(--surface);
-  padding: 16px;
+  padding: var(--space-4);
   height: 100vh;
   position: sticky;
   top: 0;
@@ -12,8 +12,8 @@
 .sidebar__top {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
 }
 
 .sidebar__brand-link {
@@ -42,14 +42,14 @@
 .sidebar__nav {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-2-5);
 }
 
 .sidebar__nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
+  gap: var(--space-3);
+  padding: var(--space-2-5) var(--space-3);
   border-radius: var(--radius-lg);
   color: var(--text-muted);
   text-decoration: none;
@@ -61,7 +61,7 @@
   color: var(--text-muted);
   font-weight: var(--font-medium); 
   transition: 0.2s; 
-  letter-spacing: 0.02345em;
+  letter-spacing: 0.03345em;
   text-transform: capitalize;
   white-space: nowrap;
 }
@@ -79,7 +79,7 @@
 .sidebar__nav-item--active .sidebar__nav-text
 {
   color: var(--text);
-  text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
+  text-shadow: 0.1px 0 0 currentColor, -0.1px 0 0 currentColor;
 }
 .sidebar__nav-item:hover .sidebar__nav-icon,
 .sidebar__nav-item--active .sidebar__nav-icon {
@@ -106,11 +106,11 @@
 
 .sidebar__footer {
   border-top: 1px solid var(--border);
-  padding: 16px 5px 10px 10px;
+  padding: var(--space-4) var(--space-1-25) var(--space-2-5) var(--space-2-5);
   margin-top: auto;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   border-radius: var(--radius-lg);
   color: var(--text-muted);
   text-decoration: none;
@@ -126,7 +126,7 @@
 .sidebar__user {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .sidebar__avatar {
@@ -172,7 +172,7 @@
 
   .sidebar {
     width: 250px;
-    padding: 12px 8px;
+    padding: var(--space-3) var(--space-2);
   }
   
   

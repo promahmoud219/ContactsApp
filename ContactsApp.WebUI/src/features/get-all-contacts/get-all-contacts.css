@@ -44,7 +44,7 @@
   z-index: 20;
   background: var(--surface);
   box-shadow: inset 0 -1px 0 var(--border);
-  padding: 20px 0;
+  padding: var(--space-5) 0;
 }
 
 .contacts__head th:first-child {
@@ -59,7 +59,7 @@
 /* ===================== */
 
 .contacts__cell {
-  padding: 16px 0;
+  padding: var(--space-4) 0;
   border-bottom: 1px solid var(--border);
   position: relative;
   
@@ -91,7 +91,7 @@
 .contacts__checkbox {
   width: 20px;
   height: 20px;
-  margin-left: 40px;
+  margin-left: var(--space-10);
 }
 
 /* ===================== */
@@ -114,7 +114,7 @@
 .contacts__cell--info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .contacts__name {

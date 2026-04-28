@@ -23,7 +23,7 @@
   z-index: 1;
 
   background: var(--surface);
-  padding: 24px;
+  padding: var(--space-6);
   border-radius: var(--radius-lg);
 
   width: 400px;
