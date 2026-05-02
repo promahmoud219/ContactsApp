@@ -32,7 +32,7 @@
   left: 50%;
   transform: translateX(-50%);
   background: #333;
-  color: #fff;
+  color: var(--bg);
   padding: var(--space-1-25) var(--space-2-5);
   border-radius: 4px;
   font-size: 12px;
@@ -61,7 +61,7 @@
 /* variants */
 .btn--primary {
   background: var(--primary);
-  color: #fff;
+  color: var(--bg);
 }
 
 .btn--primary:hover {
@@ -70,12 +70,13 @@
 
 .btn--secondary {
   border: 1px solid var(--border);
+  background: transparent;
 }
 
 .btn--secondary:hover {
   background: var(--surface);
 }
-
+ 
 .btn--link {
   background: none;
   color: var(--primary);
@@ -87,4 +88,29 @@
   width: 36px;
   height: 36px;
   padding: 0;
+}
+
+  
+.btn--primary.btn--danger {
+  background: var(--danger);
+  color: var(--on-danger);
+}
+
+.btn--primary.btn--danger:hover {
+  background: var(--danger-hover); 
+}
+
+
+.btn--secondary.btn--danger {
+  background: transparent;
+  color: var(--danger);
+}
+
+.btn--secondary.btn--danger:hover {
+  background: var(--danger-soft);
+  color: var(--danger-hover);
+}
+
+.btn--secondary.btn--cancel:hover {
+  background: var(--primary-soft);
 }

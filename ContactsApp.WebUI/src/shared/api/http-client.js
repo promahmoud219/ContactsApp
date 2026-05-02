@@ -50,3 +50,14 @@ export async function put(url, data) {
   }); 
   return handleResponse(response);
 }
+
+export async function del(url) {
+  const response = await fetch(buildUrl(url), {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  return handleResponse(response);
+}

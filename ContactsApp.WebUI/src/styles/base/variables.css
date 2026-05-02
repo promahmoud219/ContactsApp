@@ -31,7 +31,16 @@
   --primary: hsl(216, 84%, 52%, .9);
   --primary-hover: #1a5fd0;
   --primary-soft: rgba(31, 111, 235, 0.1);
+ 
+  /* Danger palette */
+  --danger: hsl(0, 72%, 51%);
+  --danger-hover: hsl(0, 74%, 42%);
+  --danger-soft: hsl(0, 72%, 51%, 0.12);
 
+  /* Text on danger */
+  --on-danger: #fff;
+
+  
   --bg: #ffffff;
   --surface: #f8fafc;
 

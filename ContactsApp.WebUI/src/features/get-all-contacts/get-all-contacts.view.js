@@ -56,7 +56,7 @@ export function renderContacts(contacts) {
 
     const menuOptions = [
       { label: "Update", className: "dropdown__item--update", data: { id: contact.id } },
-      { label: "Delete", className: "dropdown__item--delete", data: { id: contact.id } },
+      { label: "Delete", className: "dropdown__item--delete btn--secondary btn--danger", data: { id: contact.id } },
       { label: "Cancel", className: "dropdown__item--cancel" }
     ];
 

@@ -41,15 +41,4 @@
   margin-top: var(--space-5);
 }
 
-/* buttons */
-.form__actions .btn--secondary:hover {
-  background: var(--border);
-}
-
-.form__actions .btn--primary {
-  color: var(--bg);
-}
-
-.form__actions .btn--primary:hover {
-  background: var(--primary-hover);
-}
+ 

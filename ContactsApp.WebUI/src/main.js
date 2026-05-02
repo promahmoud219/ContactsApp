@@ -26,11 +26,13 @@ import {
 import { initAddContact } from "./features/add-contact/add-contact.controller.js";
 import { initGetAllContacts } from "./features/get-all-contacts/get-all-contacts.controller.js";
 import { initUpdateContact } from "./features/update-contact/update-contact.controller.js";
+import { initDeleteContact } from "./features/delete-contact/delete-contact.controller.js";
 
 initGetAllContacts();
 initModal(".modal");
 initAddContact();
 initUpdateContact();
+initDeleteContact();
 
 document.addEventListener("click", e => {
   const trigger = e.target.closest(".dropdown__trigger");

@@ -65,16 +65,7 @@
   background: #f8fafc;
   color: var(--primary);
 }
-
-/* modifiers */
-.dropdown__item--delete {
-  color: #ef4444;
-}
-
-.dropdown__item--delete:hover {
-  background: #fef2f2;
-  color: #dc2626;
-}
+ 
 
 /* open upward modifier */
 .dropdown--up .dropdown__menu {
